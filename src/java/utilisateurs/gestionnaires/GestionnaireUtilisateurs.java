@@ -27,11 +27,11 @@ public class GestionnaireUtilisateurs {
   
      public void creerUtilisateursDeTest() {
         // on crée des adresses et on les insère dans la base
-        Adresse biot = new Adresse("Biot", "06410");  
+        Adresse biot = new Adresse("1 Avenue Angus Young","Biot", "06410");  
         em.persist(biot);  
-        Adresse valbonne = new Adresse("Valbonne", "06560");  
+        Adresse valbonne = new Adresse("1 Avenue Slash", "Valbonne", "06560");  
         em.persist(valbonne);  
-        Adresse nice = new Adresse("Nice", "06000");  
+        Adresse nice = new Adresse("1 Avenue Jimi Hendrix","Nice", "06000");  
         em.persist(nice);
         
         // Note : après un persist, les objets sont connectés

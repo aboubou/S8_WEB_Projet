@@ -29,51 +29,111 @@ public class Adresse implements Serializable {
     private static final long serialVersionUID = 1L;  
     @Id  
     @GeneratedValue(strategy = GenerationType.AUTO)  
-    private int id;  
+    private int id;
+    @NotNull
+    private String m_Rue;
     @NotNull @Size(min=1)  
-    private String ville;  
+    private String m_Ville;  
     @Pattern(regexp="[0-9]{5}") // On accepte les codes postaux du type "06410"  
-    private String codePostal;  
+    private String m_CodePostal;  
     @OneToMany(mappedBy = "adresse")
-    private List<Utilisateur> utilisateurs = new ArrayList<>();
+    private List<Utilisateur> m_Utilisateurs = new ArrayList<>();
   
+    /**
+     * Constructeur par defaut
+     */
     public Adresse() {}  
-      
-    public Adresse(String ville, String codePostal) {  
-        this.ville = ville;  
-        this.codePostal = codePostal;  
+    
+    /**
+     * Constructeur normal
+     * @param rue : rue de l'utilisateur (Ex : 25 Rue de la Paix)
+     * @param ville : Ville de l'utilisateur (Ex : Paris)
+     * @param codePostal : Code postal de la ville indiquee (Ex: 7500)
+     */
+    public Adresse(String rue, String ville, String codePostal) {
+        this.m_Rue = rue;
+        this.m_Ville = ville;  
+        this.m_CodePostal = codePostal;  
     }  
 
+    /**
+     * Accesseur de consultation de la ville
+     * @return : le nom de la ville
+     */
     public String getVille() {
-        return ville;
+        return m_Ville;
     }
 
+    /**
+     * Accesseur de modification de la ville
+     * @param ville : la ville a modifier
+     */
     public void setVille(String ville) {
-        this.ville = ville;
+        this.m_Ville = ville;
     }
 
+    /**
+     * Accesseur de consultation du code postal de la ville
+     * @return : le code postal de la ville
+     */
     public String getCodePostal() {
-        return codePostal;
+        return m_CodePostal;
     }
 
+    /**
+     * Accesseur de modification du code postal de la ville
+     * @param codePostal : le code postal de ville a modifier
+     */
     public void setCodePostal(String codePostal) {
-        this.codePostal = codePostal;
+        this.m_CodePostal = codePostal;
     }
 
+    /**
+     * Methode permettant d'ajouter un utilisateur a cette adresse
+     * @param u : l'utilisateur qui habite a cette adresse
+     */
     public void addUtilisateur(Utilisateur u){
-        utilisateurs.add(u);
+        m_Utilisateurs.add(u);
     }
     
+    /**
+     * Methode permettant de supprimer un utilisateur a cette adresse
+     * @param u : l'utilisateur qui n'habite plus a cette adresse
+     */
     public void removeUtilisateur(Utilisateur u){
-        utilisateurs.remove(u);
+        m_Utilisateurs.remove(u);
     }
     
+    /**
+     * Accesseur de consultation de la liste des utilisateurs habitant a cette adresse
+     * @return : la liste d'utilisateur habitant a cette adresse
+     */
     public List<Utilisateur> getUtilisateurs(){
-        return utilisateurs;
+        return m_Utilisateurs;
     }
 
+    /**
+     * Accesseur de consultation de la cle primaire de cette adresse
+     * @return : la cle primaire
+     */
     public int getId() {
         return id;
+    }
+
+    /**
+     * Accesseur de consultation de la rue ou habite l'utilisateur
+     * @return : la rue ou habite l'utilisateur
+     */
+    public String getM_Rue() {
+        return m_Rue;
+    }
+
+    /** 
+     * Accesseur de modifacation de la rue ou habite l'utilisateur
+     * @param m_Rue : la nouvelle rue ou habite l'utilisateur
+     */
+    public void setM_Rue(String m_Rue) {
+        this.m_Rue = m_Rue;
     }
     
     
@@ -99,7 +159,7 @@ public class Adresse implements Serializable {
 
     @Override
     public String toString() {
-        return "utilisateurs.modeles.Adresse[ id=" + id + " ]";
+        return "utilisateurs.modeles.Adresse[ id=" + id + "\n rue=" + m_Rue + "\n ville=" + m_Ville + "\n code postal=" + m_CodePostal +" ]\n";
     }
     
 }
