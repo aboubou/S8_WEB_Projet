@@ -192,7 +192,7 @@ public class ServletUsers extends HttpServlet {
                 request.setAttribute("taille-max", sizeliste);
                 request.setAttribute("listeDesUsers", liste);
                 forwardTo = "template.jsp?action=listerLesUtilisateurs";
-            } else if(action.equals("listerUtilisateursParVille")){
+            } /*else if(action.equals("listerUtilisateursParVille")){
                 // on récupère le paramètre idville
                 int idVille = Integer.parseInt(request.getParameter("idVille"));
                 
@@ -203,7 +203,7 @@ public class ServletUsers extends HttpServlet {
                 request.setAttribute("listeDesUsers", liste);
                 forwardTo = "template.jsp?action=listerLesUtilisateurs";
                 message = "Liste des utilisaterus pour la ville No : " + idVille;
-            } else {
+            }*/ else {
                 forwardTo = "template.jsp?action=todo";
                 message = "La fonctionnalité pour le paramètre " + action + " est à implémenter !";
             }

@@ -28,9 +28,10 @@ public class Utilisateur implements Serializable {
     private String lastname;  
     private String login;
     private String password;
-
-    @ManyToOne
+    @OneToOne
     private Adresse adresse;
+    @OneToOne
+    private Abonnement abonnement;
 
     public Utilisateur() {  
     }  

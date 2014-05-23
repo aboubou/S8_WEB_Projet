@@ -54,7 +54,7 @@ public class GestionnaireUtilisateurs {
         
         // a est déjà en bas et connectée, donc la ligne suivante modifie les
         // données pour relier l'adresse à l'utilisateur
-        a.addUtilisateur(u);
+        //a.addUtilisateur(u);
         
         // on persiste l'utilisateur, la relation est déjà en base, cela va donc
         // ajouter une ligne dans la table des utilisateurs avec une clé étrangère
@@ -115,12 +115,12 @@ public class GestionnaireUtilisateurs {
         return q.executeUpdate();
     }
     
-   public Collection<Utilisateur> getUsersParVille(int idVille){
+   /*public Collection<Utilisateur> getUsersParVille(int idVille){
        Adresse a = em.find(Adresse.class, idVille);
        
        // a est connecté, le get va declencher un select
        return a.getUtilisateurs();
-   }
+   }*/
     // Add business logic below. (Right-click in editor and choose  
     // "Insert Code > Add Business Method")  
 }  

@@ -17,51 +17,48 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author Alexandre
  */
 @Entity
-public class Adresse implements Serializable {  
+public class Adresse implements Serializable {
     
       
     private static final long serialVersionUID = 1L;  
     @Id  
     @GeneratedValue(strategy = GenerationType.AUTO)  
-    private int id;
+    private int id;  
     @NotNull
     private String m_Rue;
     @NotNull @Size(min=1)  
     private String m_Ville;  
     @Pattern(regexp="[0-9]{5}") // On accepte les codes postaux du type "06410"  
     private String m_CodePostal;  
-    @OneToMany(mappedBy = "adresse")
-    private List<Utilisateur> m_Utilisateurs = new ArrayList<>();
+    /*@OneToMany(mappedBy = "adresse")
+    private List<Utilisateur> m_Utilisateurs = new ArrayList<>();*/
   
     /**
      * Constructeur par defaut
      */
     public Adresse() {}  
-    
+      
     /**
      * Constructeur normal
      * @param rue : rue de l'utilisateur (Ex : 25 Rue de la Paix)
      * @param ville : Ville de l'utilisateur (Ex : Paris)
      * @param codePostal : Code postal de la ville indiquee (Ex: 7500)
      */
-    public Adresse(String rue, String ville, String codePostal) {
-        this.m_Rue = rue;
+    public Adresse(String rue, String ville, String codePostal) {  
         this.m_Ville = ville;  
-        this.m_CodePostal = codePostal;  
+        this.m_CodePostal = codePostal;
+        this.m_Rue = rue; 
     }  
 
-    /**
-     * Accesseur de consultation de la ville
-     * @return : le nom de la ville
-     */
-    public String getVille() {
-        return m_Ville;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
@@ -92,25 +89,25 @@ public class Adresse implements Serializable {
      * Methode permettant d'ajouter un utilisateur a cette adresse
      * @param u : l'utilisateur qui habite a cette adresse
      */
-    public void addUtilisateur(Utilisateur u){
+    /*public void addUtilisateur(Utilisateur u){
         m_Utilisateurs.add(u);
-    }
+    }*/
     
     /**
      * Methode permettant de supprimer un utilisateur a cette adresse
      * @param u : l'utilisateur qui n'habite plus a cette adresse
      */
-    public void removeUtilisateur(Utilisateur u){
+    /*public void removeUtilisateur(Utilisateur u){
         m_Utilisateurs.remove(u);
-    }
+    }*/
     
     /**
      * Accesseur de consultation de la liste des utilisateurs habitant a cette adresse
      * @return : la liste d'utilisateur habitant a cette adresse
      */
-    public List<Utilisateur> getUtilisateurs(){
+    /*public List<Utilisateur> getUtilisateurs(){
         return m_Utilisateurs;
-    }
+    }*/
 
     /**
      * Accesseur de consultation de la cle primaire de cette adresse
@@ -159,7 +156,7 @@ public class Adresse implements Serializable {
 
     @Override
     public String toString() {
-        return "utilisateurs.modeles.Adresse[ id=" + id + "\n rue=" + m_Rue + "\n ville=" + m_Ville + "\n code postal=" + m_CodePostal +" ]\n";
+        return "utilisateurs.modeles.Adresse[ id=" + id + " ]";
     }
     
 }
