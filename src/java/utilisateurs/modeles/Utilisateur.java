@@ -32,6 +32,8 @@ public class Utilisateur implements Serializable {
     private Adresse adresse;
     @OneToOne
     private Abonnement abonnement;
+    
+    private Instrument[] instruments;
 
     public Utilisateur() {  
     }  
