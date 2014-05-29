@@ -37,8 +37,42 @@
                 $("#abonnement-input").val(str);              
             }
             
-            function Inscrire(){
+            function controleInscription(){
+                var erreur = 0;
+                if($("#input-pseudo").val() == null || $("#input-pseudo").val() == ""){
+                    $("#error-pseudo").show();
+                    erreur += 1;
+                }
+                else if($("#input-pass").val() == null || $("#input-pass").val() == ""){
+                    $("#error-pass").show();
+                    erreur += 1;
+                }
+                else if($("#input-name").val() == null || $("#input-name").val() == ""){
+                    $("#error-name").show();
+                    erreur += 1;
+                }
+                 else if($("#input-firstname").val() == null || $("#input-firstname").val() == ""){
+                    $("#error-firstname").show();
+                    erreur += 1;
+                }
+                else if($("#input-address").val() == null || $("#input-address").val() == ""){
+                    $("#error-address").show();
+                    erreur += 1;
+                }
+                else if($("#input-town").val() == null || $("#input-town").val() == ""){
+                    $("#error-town").show();
+                    erreur += 1;
+                }
+                else if($("#input-postal").val() == null || $("#input-postal").val() == ""){
+                    $("#error-postal").show();
+                    erreur += 1;
+                }
                 
+                if(erreur == 0){
+                    
+                }
+                    
+                    
             }
         </script>
     </head>
@@ -47,23 +81,31 @@
 
       <form role="form" class="form-signin">
         <h2 class="form-signin-heading">Formulaire d'inscription</h2>
-        
+
         <label>Pseudonyme *</label>
-        <input type="text"  placeholder="Pseudo" class="form-control" required><br>
+        <div class="alert alert-danger error-cache" id="error-pseudo">Veuillez indiquer un pseudonyme</div>
+        <input type="text"  placeholder="Pseudo" class="form-control" required id="input-pseudo"><br>
         <label>Mot de passe *</label>
-        <input type="password"  placeholder="Password" class="form-control" required><br>
+        <div class="alert alert-danger error-cache" id="error-pass">Veuillez indiquer un mot de passe</div>
+        <input type="password"  placeholder="Password" class="form-control" required id="input-pass"><br>
         <label>Nom *</label>
-        <input type="text"  placeholder="Nom" class="form-control" required><br>
+        <div class="alert alert-danger error-cache" id="error-name">Veuillez indiquer un nom</div>
+        <input type="text"  placeholder="Nom" class="form-control" required id="input-name"><br>
         <label>Prénom *</label>
-        <input type="text"  placeholder="Prénom" class="form-control" required><br>
+        <div class="alert alert-danger error-cache" id="error-firstname">Veuillez indiquer un prénom</div>
+        <input type="text"  placeholder="Prénom" class="form-control" required id="input-firstname"><br>
         <label>Adresse *</label>
-        <input type="text"  placeholder="Adresse" class="form-control" required><br>
+        <div class="alert alert-danger error-cache" id="error-address">Veuillez indiquer une adresse</div>
+        <input type="text"  placeholder="Adresse" class="form-control" required id="input-address"><br>
         <label>Ville *</label>
-        <input type="text"  placeholder="Ville" class="form-control" required><br>
+        <div class="alert alert-danger error-cache" id="error-town">Veuillez indiquer une ville</div>
+        <input type="text"  placeholder="Ville" class="form-control" required id="intput-town"><br>
         <label>Code postal *</label>
-        <input type="text"  placeholder="Code postal" class="form-control" required><br>
+        <div class="alert alert-danger error-cache" id="error-postal">Veuillez indiquer un code postal</div>
+        <input type="text"  placeholder="Code postal" class="form-control" required id="input-postal"><br>
         <label>E-mail *</label>
-        <input type="email" autofocus="" required placeholder="Email address" class="form-control" required><br>
+        <div class="alert alert-danger error-cache" id="error-mail">Veuillez indiquer un code postal</div>
+        <input type="email" autofocus="" required placeholder="Email address" class="form-control" required id="input-mail"><br>
         <label>Instrument(s) joué(s) *</label>
         <div class="input-group" id="instru-input">
             <div class="input-group-btn">
@@ -89,7 +131,7 @@
             </div><!-- /btn-group -->
             <input type="text" class="form-control" id="abonnement-input" required>
         </div><br>
-        <button type="submit" class="btn btn-lg btn-primary btn-block" onsubmit="Inscrire();">Valider</button>
+        <button type="submit" class="btn btn-lg btn-primary btn-block" onsubmit="controleInscription();">Valider</button>
       </form>
 
     </div>

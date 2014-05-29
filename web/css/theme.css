@@ -12,3 +12,7 @@ and open the template in the editor.
 #menu {
     margin-top:100px;
 }
+
+.error-cache{
+    visibility: hidden;
+}
