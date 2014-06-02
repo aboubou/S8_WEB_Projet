@@ -130,8 +130,11 @@
     <body>
         <div class="container" >
             <c:if test="${param['action']=='creerUtilisateurSuccess'}" >
-                <div class="alert alert-success" id="inscription-success">Votre insciption est un succès !</div></div><div>
+                <div class="alert alert-success" id="inscription-success">Votre insciption est un succès !</div>
+                <input type="button" class="btn btn-lg btn-primary btn-block" value="Retour à l'acceuil" onclick="self.location.href='index.jsp'"><br>
+                </div><div>
                    <img align="center" src="img/Angus.jpg" id="angus-img">
+                   
             </c:if>
             <c:if test="${param['action']=='creerUtilisateurError'}" >
                    <div class="alert alert-danger">Une erreur est survenue lors de l'enregistrement de votre inscription !</div>
