@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="connecte" value="${connecte} | false" scope="session"/>
 <div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
@@ -16,9 +15,9 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="#" class="navbar-brand">Project name</a>
+        <a href="#" class="navbar-brand"><c:out value="${sessionScope['connecte']}"/></a>
       </div>
-       <c:if test="${!connecte}">
+       <c:if test="${empty sessionScope['connecte']}">
         <div class="navbar-collapse collapse">
           <form action="ServletInscription" class="navbar-form navbar-right">
                 <input type="hidden" value="initialiserFormulaire" name="action">
@@ -39,7 +38,7 @@
              
         </div><!--/.navbar-collapse -->
       </c:if>
-     <c:if test="${connecte}">
+     <c:if test="${not empty sessionScope['connecte']}">
          <div class="navbar-collapse collapse">
           <form role="form" class="navbar-form navbar-right" action="ServletConnexion">
             <input type="hidden" name="action" value="deconnecterUtilisateur">
