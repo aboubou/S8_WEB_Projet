@@ -7,11 +7,15 @@
 package utilisateurs.modeles;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -23,17 +27,18 @@ public class Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;  
-    private String firstname;  
-    private String lastname;  
+    private int id; 
     private String login;
     private String password;
-    @OneToOne
+    private String firstname;  
+    private String lastname;  
+    private String mail;
+    @ManyToOne
     private Adresse adresse;
-    @OneToOne
+    //@OneToOne
     private Abonnement abonnement;
-    
-    private Instrument[] instruments;
+    //@OneToMany(mappedBy = "utilisateur")
+    private List<Instrument> instruments = new ArrayList<Instrument>();
 
     public Utilisateur() {  
     }  
@@ -43,7 +48,16 @@ public class Utilisateur implements Serializable {
         this.lastname = lastname;  
         this.firstname = firstname;
         this.password = password;
-    }  
+    }
+    
+    public Utilisateur(final String pseudo, final String mdp, final String nom, final String prenom, final String mail) {  
+        this.login = pseudo;
+        this.password = mdp;
+        this.lastname = nom;  
+        this.firstname = prenom;
+        this.mail = mail;
+
+    } 
 
     public String getFirstname() {
         return firstname;
@@ -76,6 +90,14 @@ public class Utilisateur implements Serializable {
     public void setPassword(String password){
         this.password = password;
     }
+    
+    public String getMail(){
+        return mail;
+    }
+    
+    public void setMail(String mail){
+        this.mail = mail;
+    }
 
     public Adresse getAdresse() {
         return adresse;
@@ -83,6 +105,30 @@ public class Utilisateur implements Serializable {
 
     public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
+    }
+    
+     /*public ArrayList<Instrument> getInstruments() {
+        return instruments;
+    }
+
+    public void setInstruments(ArrayList<Instrument> instruments) {
+        this.instruments = instruments;
+    }*/
+    
+    public void addInstrument(Instrument instrument) {
+        this.instruments.add(instrument);
+    }
+    
+    public void removeInstrument(Instrument instrument) {
+        this.instruments.remove(instrument);
+    }
+    
+     public Abonnement getAbonnement() {
+        return abonnement;
+    }
+
+    public void setAbonnement(Abonnement abonnement) {
+        this.abonnement = abonnement;
     }
     
     

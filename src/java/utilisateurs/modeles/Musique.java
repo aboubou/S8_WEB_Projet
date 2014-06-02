@@ -26,12 +26,10 @@ public class Musique implements Serializable {
     private String m_Titre;
     /* artiste */
     private String m_Artiste;
-    /* Prix */
-    private double m_Prix;
     /* instrument */
     private Instrument m_Instrument;
-    /* Style */
-    private String m_Style;
+    /* Prix */
+    private int m_Piste;
     /* Année */
     private int m_Annee;
     /* Difficultés */
@@ -39,12 +37,11 @@ public class Musique implements Serializable {
     
     public Musique(){}
     
-    public Musique(String titre, String artiste, double prix, Instrument instru, String style, int annee, int difficulte){
+    public Musique(String titre, String artiste, int piste, Instrument instru, String style, int annee, int difficulte){
         this.m_Titre = titre;
         this.m_Artiste = artiste;
-        this.m_Prix = prix;
+        this.m_Piste = piste;
         this.m_Instrument = instru;
-        this.m_Style = style;
         this.m_Annee = annee;
         this.m_Difficulte = difficulte;
     }
@@ -53,56 +50,48 @@ public class Musique implements Serializable {
         return m_Titre;
     }
 
-    public void setTitre(String m_Titre) {
-        this.m_Titre = m_Titre;
+    public void setTitre(String titre) {
+        this.m_Titre = titre;
     }
 
     public String getArtiste() {
         return m_Artiste;
     }
 
-    public void setArtiste(String m_Artiste) {
-        this.m_Artiste = m_Artiste;
+    public void setArtiste(String artiste) {
+        this.m_Artiste = artiste;
     }
 
-    public double getPrix() {
-        return m_Prix;
+    public int getPiste() {
+        return m_Piste;
     }
 
-    public void setPrix(double m_Prix) {
-        this.m_Prix = m_Prix;
+    public void setPiste(int piste) {
+        this.m_Piste = piste;
     }
 
     public Instrument getInstrument() {
         return m_Instrument;
     }
 
-    public void setInstrument(Instrument m_Instrument) {
-        this.m_Instrument = m_Instrument;
-    }
-
-    public String getStyle() {
-        return m_Style;
-    }
-
-    public void setStyle(String m_Style) {
-        this.m_Style = m_Style;
+    public void setInstrument(Instrument instrument) {
+        this.m_Instrument = instrument;
     }
 
     public int getAnnee() {
         return m_Annee;
     }
 
-    public void setAnnee(int m_Annee) {
-        this.m_Annee = m_Annee;
+    public void setAnnee(int annee) {
+        this.m_Annee = annee;
     }
 
     public int getDifficulte() {
         return m_Difficulte;
     }
 
-    public void setDifficulte(int m_Difficulte) {
-        this.m_Difficulte = m_Difficulte;
+    public void setDifficulte(int difficulte) {
+        this.m_Difficulte = difficulte;
     }
 
     public int getId() {

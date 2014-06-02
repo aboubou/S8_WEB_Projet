@@ -37,8 +37,8 @@ public class Adresse implements Serializable {
     private String m_Ville;  
     @Pattern(regexp="[0-9]{5}") // On accepte les codes postaux du type "06410"  
     private String m_CodePostal;  
-    /*@OneToMany(mappedBy = "adresse")
-    private List<Utilisateur> m_Utilisateurs = new ArrayList<>();*/
+    @OneToMany(mappedBy = "adresse")
+    private List<Utilisateur> m_Utilisateurs = new ArrayList<>();
   
     /**
      * Constructeur par defaut
@@ -89,25 +89,25 @@ public class Adresse implements Serializable {
      * Methode permettant d'ajouter un utilisateur a cette adresse
      * @param u : l'utilisateur qui habite a cette adresse
      */
-    /*public void addUtilisateur(Utilisateur u){
+    public void addUtilisateur(Utilisateur u){
         m_Utilisateurs.add(u);
-    }*/
+    }
     
     /**
      * Methode permettant de supprimer un utilisateur a cette adresse
      * @param u : l'utilisateur qui n'habite plus a cette adresse
      */
-    /*public void removeUtilisateur(Utilisateur u){
+    public void removeUtilisateur(Utilisateur u){
         m_Utilisateurs.remove(u);
-    }*/
+    }
     
     /**
      * Accesseur de consultation de la liste des utilisateurs habitant a cette adresse
      * @return : la liste d'utilisateur habitant a cette adresse
      */
-    /*public List<Utilisateur> getUtilisateurs(){
+    public List<Utilisateur> getUtilisateurs(){
         return m_Utilisateurs;
-    }*/
+    }
 
     /**
      * Accesseur de consultation de la cle primaire de cette adresse

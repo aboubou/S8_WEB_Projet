@@ -48,19 +48,30 @@ public class ServletConnexion extends HttpServlet {
         if (action.equals("identifierUtilisateur")){
                 String paramLog = request.getParameter("login");
                 String paramPass = request.getParameter("password");
-                System.out.println(paramLog);
-                HttpSession session = request.getSession();
+                
+                HttpSession session = request.getSession(true);
+                int duree = -10;
                 if(gestionnaireConnexion.identifierUtilisateur(paramLog, paramPass)!= 0){
-                    message = "Vous vous êtes authentifié en tant que "+paramLog;
                     session.setAttribute(ATT_SESSION_USER, paramLog);
+                    session.setAttribute("pseudo", paramLog);
+                    session.setAttribute("connecte", true);
+                    session.setMaxInactiveInterval(duree);
                     request.setAttribute(ATT_USER, paramLog);
+                    forwardTo="index.jsp?action=identifierUtilisateurSuccess";
                 }else{
-                    message = "Echec de l'authentification";
                     session.setAttribute(ATT_SESSION_USER, null);
+                    session.setAttribute("connecte", false);
+                    forwardTo="index.jsp?action=identifierUtilisateurError";
                 }
-                forwardTo="template.jsp?action=identifierUtilisateur";
+                
         }
-        RequestDispatcher dp = request.getRequestDispatcher(forwardTo + "&message=" + message);  
+        else if(action.equals("deconnecterUtilisateur")){
+           HttpSession session = request.getSession();
+           session.setAttribute("connecte",false);
+           session.invalidate();
+           forwardTo="index.jsp";
+        }
+        RequestDispatcher dp = request.getRequestDispatcher(forwardTo);  
         dp.forward(request, response);
     }
 

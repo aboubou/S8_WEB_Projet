@@ -103,6 +103,10 @@ public class ServletUsers extends HttpServlet {
                 request.setAttribute("listeDesUsers", liste);
                 forwardTo = "template.jsp?action=listerLesUtilisateurs";
                 message = "Liste des utilisateurs";
+            } else if (action.equals("creerUtilisateur")) {
+                forwardTo = "fInscription.jsp?action=creerUtilisateur";
+                message = "Liste des utilisateurs après ajout de";
+                
             } else if (action.equals("creerUnUtilisateur")) {
                 String param1 = request.getParameter("nom");
                 String param2 = request.getParameter("prenom");

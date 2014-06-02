@@ -24,12 +24,12 @@ public class Instrument implements Serializable {
     private int id;
 
     /* Description */
-    private String m_Instrument;
+    private String instrument;
     
     public Instrument(){}
     
     public Instrument(String instru){
-        this.m_Instrument = instru;
+        this.instrument = instru;
     }
     
     public int getId() {
@@ -40,12 +40,12 @@ public class Instrument implements Serializable {
         this.id = id;
     }
 
-    public String getM_Instrument() {
-        return m_Instrument;
+    public String getInstrument() {
+        return instrument;
     }
 
-    public void setM_Instrument(String m_Instrument) {
-        this.m_Instrument = m_Instrument;
+    public void setInstrument(String instrument) {
+        this.instrument = instrument;
     }
 
      @Override

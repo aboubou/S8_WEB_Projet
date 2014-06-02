@@ -25,21 +25,21 @@ public class Abonnement implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     /* Description de l'abonnement */
-    private String m_Description;
+    private String description;
     /* Durée */
-    private int m_Duree;
+    private float duree;
     /* Prix */
-    private double m_Prix;
+    private double prix;
 
    /**
      * Constructeur par defaut
      */
     public Abonnement() {}
     
-    public Abonnement(String description, int duree, double prix){
-        this.m_Description = description;
-        this.m_Duree = duree;
-        this.m_Prix = prix;
+    public Abonnement(String description, float duree, double prix){
+        this.description = description;
+        this.duree = duree;
+        this.prix = prix;
     }
     
     public int getId() {
@@ -51,27 +51,27 @@ public class Abonnement implements Serializable {
     }
 
     public String getDescription() {
-        return m_Description;
+        return description;
     }
 
-    public void setDescription(String m_Description) {
-        this.m_Description = m_Description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getDuree() {
-        return m_Duree;
+    public float getDuree() {
+        return duree;
     }
 
-    public void setDuree(int m_Duree) {
-        this.m_Duree = m_Duree;
+    public void setDuree(float duree) {
+        this.duree = duree;
     }
 
     public double getPrix() {
-        return m_Prix;
+        return prix;
     }
 
-    public void setPrix(double m_Prix) {
-        this.m_Prix = m_Prix;
+    public void setPrix(double prix) {
+        this.prix = prix;
     }
 
     @Override

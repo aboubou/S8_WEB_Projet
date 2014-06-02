@@ -6,13 +6,17 @@
 
 package utilisateurs.gestionnaires;
 
+import java.util.ArrayList;
 import java.util.Collection;  
+import java.util.List;
 import javax.ejb.Stateless;  
 import javax.persistence.EntityManager;  
 import javax.persistence.PersistenceContext;  
 import javax.persistence.Query;  
+import utilisateurs.modeles.Abonnement;
 import utilisateurs.modeles.Utilisateur;
 import utilisateurs.modeles.Adresse;
+import utilisateurs.modeles.Instrument;
 
 /**
  *
@@ -61,7 +65,38 @@ public class GestionnaireUtilisateurs {
         // correspondant à l'adresse
         em.persist(u);  
         return u;  
-    }  
+    }
+    
+     public Utilisateur creerUtilisateur(String pseudo, String mdp, String nom, String prenom, String adresse, String ville, String codep, String mail, ArrayList<Instrument> instruments/* String[] instruments*/, String abonnement) {
+        
+        
+        Adresse a = new Adresse(adresse, ville, codep);
+        em.persist(a);
+        
+        Utilisateur u = new Utilisateur(pseudo, mdp, nom, prenom, mail);
+        
+        u.setAdresse(a);
+        
+        for(int i = 0; i < instruments.size(); i++){
+            u.addInstrument(instruments.get(i));
+        }
+        
+        /*for(int i = 0; i < instruments.length; i++)
+            u.addInstrument(getInstrument(instruments[i]));*/
+        u.setAbonnement(getAbonnement(abonnement));
+        
+        
+        // a est déjà en bas et connectée, donc la ligne suivante modifie les
+        // données pour relier l'adresse à l'utilisateur
+        a.addUtilisateur(u);
+        
+        // on persiste l'utilisateur, la relation est déjà en base, cela va donc
+        // ajouter une ligne dans la table des utilisateurs avec une clé étrangère
+        // correspondant à l'adresse
+        em.persist(u);
+
+        return u;  
+    }
   
      public Collection<Utilisateur> getAllUsers() {  
         // Exécution d'une requête équivalente à un select *  
@@ -113,6 +148,20 @@ public class GestionnaireUtilisateurs {
         q.setParameter("prenom", prenom);
         q.setParameter("login", login);
         return q.executeUpdate();
+    }
+    
+    public Instrument getInstrument(String id){
+        int idI =Integer.parseInt(id);
+        Query q = em.createQuery("select i from Instrument i where i.id = :idi");
+        q.setParameter("idi", idI);
+        return (Instrument)q.getSingleResult(); 
+    }
+    
+    public Abonnement getAbonnement(String id){
+        int idA =Integer.parseInt(id);
+        Query q = em.createQuery("select a from Abonnement a where a.id = :idA");
+        q.setParameter("idA", idA);
+        return (Abonnement)q.getSingleResult(); 
     }
     
    /*public Collection<Utilisateur> getUsersParVille(int idVille){
