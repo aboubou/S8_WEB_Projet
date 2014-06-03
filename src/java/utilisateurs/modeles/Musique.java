@@ -23,75 +23,86 @@ public class Musique implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     /* titre */
-    private String m_Titre;
+    private String titre;
     /* artiste */
-    private String m_Artiste;
+    private String artiste;
     /* instrument */
-    private Instrument m_Instrument;
+    private Instrument instrument;
     /* Prix */
-    private int m_Piste;
+    private int piste;
     /* Année */
-    private int m_Annee;
+    private int annee;
     /* Difficultés */
-    private int m_Difficulte;
+    private int difficulte;
+    
+    private String style;
     
     public Musique(){}
     
     public Musique(String titre, String artiste, int piste, Instrument instru, String style, int annee, int difficulte){
-        this.m_Titre = titre;
-        this.m_Artiste = artiste;
-        this.m_Piste = piste;
-        this.m_Instrument = instru;
-        this.m_Annee = annee;
-        this.m_Difficulte = difficulte;
+        this.titre = titre;
+        this.artiste = artiste;
+        this.piste = piste;
+        this.instrument = instru;
+        this.annee = annee;
+        this.difficulte = difficulte;
+        this.style = style;
     }
 
     public String getTitre() {
-        return m_Titre;
+        return titre;
     }
 
     public void setTitre(String titre) {
-        this.m_Titre = titre;
+        this.titre = titre;
     }
 
     public String getArtiste() {
-        return m_Artiste;
+        return artiste;
     }
 
     public void setArtiste(String artiste) {
-        this.m_Artiste = artiste;
+        this.artiste = artiste;
     }
 
     public int getPiste() {
-        return m_Piste;
+        return piste;
     }
 
     public void setPiste(int piste) {
-        this.m_Piste = piste;
+        this.piste = piste;
     }
 
     public Instrument getInstrument() {
-        return m_Instrument;
+        return instrument;
     }
 
     public void setInstrument(Instrument instrument) {
-        this.m_Instrument = instrument;
+        this.instrument = instrument;
     }
 
     public int getAnnee() {
-        return m_Annee;
+        return annee;
     }
 
     public void setAnnee(int annee) {
-        this.m_Annee = annee;
+        this.annee = annee;
     }
 
     public int getDifficulte() {
-        return m_Difficulte;
+        return difficulte;
     }
 
     public void setDifficulte(int difficulte) {
-        this.m_Difficulte = difficulte;
+        this.difficulte = difficulte;
+    }
+    
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
     }
 
     public int getId() {

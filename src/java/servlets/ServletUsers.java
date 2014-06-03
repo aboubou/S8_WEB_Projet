@@ -14,9 +14,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utilisateurs.gestionnaires.GestionnaireRecherche;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
 import utilisateurs.modeles.Adresse;
+import utilisateurs.modeles.Musique;
 
 /**
  *
@@ -27,6 +29,9 @@ public class ServletUsers extends HttpServlet {
 
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
+    
+    @EJB
+    private GestionnaireRecherche gestionnaireRecherche;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,68 +50,59 @@ public class ServletUsers extends HttpServlet {
         String message = "";
 
         if (action != null) {
-            if (action.equals("listerLesUtilisateurs")) {
-                int sizeliste = gestionnaireUtilisateurs.getAllUsers().size();
-
-                if (sizeliste > 10) {
-                    request.setAttribute("cur-min", 0);
-                    request.setAttribute("cur-max", 10);
+            if (action.equals("rechercherTitre")) {
+                String titre = request.getParameter("titre");
+                Collection<Musique> listeResultat = gestionnaireRecherche.getMusiqueParTitre(titre);
+                if (!listeResultat.isEmpty()) {
+                    request.setAttribute("resultatRecherche", listeResultat);
+                    forwardTo = "index.jsp?action=rechercheTitreResultat";
+                } else {
+                    forwardTo = "index.jsp?action=rechercheTitreZero";
                 }
-                request.setAttribute("taille-max", sizeliste);
-                Collection<Utilisateur> liste = gestionnaireUtilisateurs.getAllUsers(0, 10);
-                request.setAttribute("listeDesUsers", liste);
-                forwardTo = "template.jsp?action=listerLesUtilisateurs";
-                message = "Liste des utilisateurs";
-            } else if (action.equals("affichersuivant")) {
-                Integer param1 = new Integer(request.getParameter("cur-min"));
-                param1 += 10;
-                Integer param2 = new Integer(request.getParameter("cur-max"));
-                param2 += 10;
-                Collection<Utilisateur> liste = gestionnaireUtilisateurs.getAllUsers(param1, 10);
-                if (liste.size() != 0) {
-                    request.setAttribute("cur-min", param1);
-                    request.setAttribute("cur-max", param2);
+            }else if (action.equals("rechercherArtiste")) {
+                String artiste = request.getParameter("artiste");
+                Collection<Musique> listeResultat = gestionnaireRecherche.getMusiqueParArtiste(artiste);
+                if (!listeResultat.isEmpty()) {
+                    request.setAttribute("resultatRecherche", listeResultat);
+                    forwardTo = "index.jsp?action=rechercheResultat";
+                } else {
+                    forwardTo = "index.jsp?action=rechercheAucunResultat";
+                } 
+            } else if (action.equals("rechercherStyleForm")) {
+                Collection<String> listeStyles = gestionnaireRecherche.getStyles();
+                if (!listeStyles.isEmpty()) {
+                    request.setAttribute("resultatStyles", listeStyles);
+                    forwardTo = "index.jsp?action=rechercherStyleForm";
+                } else {
+                    forwardTo = "index.jsp?action=rechercheTitreZero";
                 }
-                request.setAttribute("taille-max", gestionnaireUtilisateurs.getAllUsers().size());
-                request.setAttribute("listeDesUsers", liste);
-                forwardTo = "template.jsp?action=listerLesUtilisateurs";
-                message = "Liste des utilisateurs";
-            } else if (action.equals("afficherprecedent")) {
-                Integer param1 = new Integer(request.getParameter("cur-min"));
-                param1 -= 10;
-                Integer param2 = new Integer(request.getParameter("cur-max"));
-                param2 -= 10;
-                if (param2 < 10) {
-                    param2 = 10;
-                }
-                if (param1 < 0) {
-                    param1 = 0;
-                }
-                Collection<Utilisateur> liste = gestionnaireUtilisateurs.getAllUsers(param1, 10);
-                request.setAttribute("cur-min", param1);
-                request.setAttribute("cur-max", param2);
-                request.setAttribute("taille-max", gestionnaireUtilisateurs.getAllUsers().size());
-                request.setAttribute("listeDesUsers", liste);
-                forwardTo = "template.jsp?action=listerLesUtilisateurs";
-                message = "Liste des utilisateurs";
-            } else if (action.equals("creerUnUtilisateurParDefaut")) {
-                gestionnaireUtilisateurs.creeUtilisateur("user", "user", "user", "user");
-                forwardTo = "template.jsp?action=creerUnUtilisateurParDefaut";
-                message = "Vous venez de créer un utilisateur par défaut";
-            } else if (action.equals("creerUtilisateursDeTest")) {
-                gestionnaireUtilisateurs.creerUtilisateursDeTest();
-                int sizeliste = gestionnaireUtilisateurs.getAllUsers().size();
-                Collection<Utilisateur> liste = gestionnaireUtilisateurs.getAllUsers(0,10);
-                request.setAttribute("cur-min", 0);
-                request.setAttribute("cur-max", 10);
-                request.setAttribute("taille-max", sizeliste);
-                request.setAttribute("listeDesUsers", liste);
-                forwardTo = "template.jsp?action=listerLesUtilisateurs";
-                message = "Liste des utilisateurs";
-            } else if (action.equals("creerUtilisateur")) {
-                forwardTo = "fInscription.jsp?action=creerUtilisateur";
-                message = "Liste des utilisateurs après ajout de";
-                
+            } else if (action.equals("rechercherAnneeForm")) {
+                /*String titre = request.getParameter("artiste");
+                Collection<Musique> listeResultat = gestionnaireRecherche.getMusiqueParTitre(titre);
+                if (!listeResultat.isEmpty()) {
+                    request.setAttribute("resultatRecherche", listeResultat);
+                    forwardTo = "index.jsp?action=rechercheTitreResultat";
+                } else {
+                    forwardTo = "index.jsp?action=rechercheTitreZero";
+                } */ 
+            } else if (action.equals("rechercherInstrumentForm")) {
+                /*String titre = request.getParameter("artiste");
+                Collection<Musique> listeResultat = gestionnaireRecherche.getMusiqueParTitre(titre);
+                if (!listeResultat.isEmpty()) {
+                    request.setAttribute("resultatRecherche", listeResultat);
+                    forwardTo = "index.jsp?action=rechercheTitreResultat";
+                } else {
+                    forwardTo = "index.jsp?action=rechercheTitreZero";
+                } */ 
+            } else if (action.equals("rechercherPisteForm")) {
+                /*String titre = request.getParameter("artiste");
+                Collection<Musique> listeResultat = gestionnaireRecherche.getMusiqueParTitre(titre);
+                if (!listeResultat.isEmpty()) {
+                    request.setAttribute("resultatRecherche", listeResultat);
+                    forwardTo = "index.jsp?action=rechercheTitreResultat";
+                } else {
+                    forwardTo = "index.jsp?action=rechercheTitreZero";
+                } */ 
             } else if (action.equals("creerUnUtilisateur")) {
                 String param1 = request.getParameter("nom");
                 String param2 = request.getParameter("prenom");
