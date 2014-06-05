@@ -40,10 +40,26 @@ and open the template in the editor.
                 $("#instru-inputh-search").attr("value",val);
             }
             
+            function exectuerFormProfil(){
+                $("#menu-profil").submit();
+            }
+            
              $(document).ready(function() {
                 $('#menu-style').click(function()
                     {
                     $('#form-style-init').submit();
+                });
+                
+                 $('#btn-profil').click(function(){
+                    $('#menu-profil').submit();
+                });
+                
+                $('#menu-profil-search').click(function(){
+                    $('#form-profil-init').submit();
+                });
+                
+                $('#menu-musiques-search').click(function(){
+                    $('#form-musiques-init').submit();
                 });
                 
                 $('#menu-annee-search').click(function()
@@ -100,15 +116,46 @@ and open the template in the editor.
         <div class="container" id="menu">
        
             <jsp:include page="menu.jsp"/>
-            <c:if test="${param['action'] == 'profilUtilisateur'}">
+            <c:out value="${param['action']}"/>
+            <c:if test="${param['action'] == 'afficherProfilSuccess'}">
                 <jsp:include page="profil.jsp"/>
             </c:if>
-               <c:if test="${(param[action] != 'profilUtilisateur')}">
-            <jsp:include page="fRecherche.jsp"/>   
+
+            <c:if test="${(param['action'] == 'rechercherTitreForm' || param['action'] == 'rechercherArtisteForm' || param['action'] == 'rechercherStyleForm' || param['action'] == 'rechercherAnneeForm' || param['action'] == 'rechercherInstruForm' ||
+                          param['action'] == 'rechercheTitreResultat' || param['action'] == 'rechercheResultat' ) }">
+                    <jsp:include page="fRecherche.jsp"/>
+            </c:if>
+             <c:if test="${( param['action'] == 'rechercheResultat' || param['action'] == 'afficherMusiques' ) }">
             <!--<div id="resultat-recherche" >-->
+                <form action="ServletUsers" id="form-mettre-p">
                     <jsp:include page="resultatRecherche.jsp"/> 
+                    <input type="hidden" value="mettrePanier" name="action" id="inputh-mettre-panier">
+                    <button class="btn btn-success" type="submit" id="mettrePanier">Mettre au panier !</button>
+                </form>
             <!--</div>-->
             </c:if>
+            <c:if test="${(param['action'] == 'afficherPanier') }">
+            <div class="panel panel-info" id="panier-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Votre profil</h3>
+      </div>
+      <div class="panel-body">
+                <form action="ServletUsers" id="form-achat-p">
+                    <jsp:include page="resultatRecherche.jsp"/>
+                    <div class="alert alert-info">Votre facture s'élève à ${prixAchat} €</div>
+                    <input type="hidden" value="AcheterPanier" name="action" id="inputh-achat-panier">
+                    <button class="btn btn-success" type="submit" id="achatPanier">Acheter !</button>
+                </form>
+           </div>
+            </div>
+            </c:if>
+            <c:if test="${(param['action'] == 'rechercheAucunResultat')}">
+                 <div class="alert alert-warning">Votre recherche n'a abouti à aucun résultat !</div>
+            </c:if>
+            <c:if test="${(param['action'] == 'panierAucuneMusique')}">
+                 <div class="alert alert-warning">Votre panier est vide !</div>
+            </c:if>     
+            
         </div>
          </c:if>
     </div>

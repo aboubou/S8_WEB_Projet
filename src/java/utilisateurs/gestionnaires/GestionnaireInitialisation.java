@@ -6,9 +6,13 @@
 
 package utilisateurs.gestionnaires;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;  
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;  
 import javax.persistence.EntityManager;  
 import javax.persistence.PersistenceContext;  
@@ -194,15 +198,29 @@ public class GestionnaireInitialisation {
          instrud.add(guitare);
          instrud.add(basse);
          
-         Utilisateur admin = new Utilisateur("admin", "admin","admin", "admin", "1 rue de l'admin", "Admin", "99999", "admin@admin.com", instrud, vie);
+         Adresse adresseAdmin = new Adresse( "1 rue de l'admin", "Admin", "99999");
+         em.persist(adresseAdmin);
+         Utilisateur admin = new Utilisateur("admin", "admin","admin", "admin", adresseAdmin, "admin@admin.com", instrud, vie);
          em.persist(admin);
          
         
-       
-         Utilisateur adminDesabo = new Utilisateur("ud", "ud","Utilisateur désabonné", "Utilisateur désabonné", "1 rue du désabonnement", "Desabonnement","99999", "desabonne@desabonne.com", instrud, mois );
-         Date dateDesabo = new Date(1999, 12, 12);
-         adminDesabo.setDateAbo(dateDesabo);
-         em.persist(adminDesabo);
+         Adresse adresseDesabo = new Adresse("1 rue du désabonnement", "Desabonnement","99999");
+         em.persist(adresseDesabo);
+         Utilisateur adminDesabo = new Utilisateur("ud", "ud","Utilisateur désabonné", "Utilisateur désabonné", adresseDesabo, "desabonne@desabonne.com", instrud, mois );
+         //Date dateDesabo = new Date(1999, 12, 12);
+         
+         
+        try {
+            Date dateDesabo = null;
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            dateDesabo = simpleDateFormat.parse("22/06/2006");
+            adminDesabo.setDateAbo(dateDesabo);
+            em.persist(adminDesabo);
+        } catch (ParseException ex) {
+            Logger.getLogger(GestionnaireInitialisation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+         
 
     }
     

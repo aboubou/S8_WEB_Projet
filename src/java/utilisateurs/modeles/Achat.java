@@ -26,26 +26,26 @@ public class Achat implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     /* identifiant de la musique achetée */
-    private int m_IdMusique;
+    private int musique;
     /* identifiant de l'acheteur */
-    private int m_IdAcheteur;
+    private int acheteur;
     /* date d'achat*/
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date m_DateAchat;
+    private Date dateAchat;
 
     
     public Achat(){}
     
-    public Achat(int musique, int acheteur, String date){
-        this.m_DateAchat = new Date(date);
-        this.m_IdMusique = musique;
-        this.m_IdAcheteur = acheteur;
+    public Achat(int musique, int acheteur){
+        this.dateAchat = new Date();
+        this.musique = musique;
+        this.acheteur = acheteur;
     }
     
     public Achat(int musique, int acheteur, Date date){
-        this.m_DateAchat = date;
-        this.m_IdMusique = musique;
-        this.m_IdAcheteur = acheteur;
+        this.dateAchat = date;
+        this.musique = musique;
+        this.acheteur = acheteur;
     }
     
 
@@ -57,28 +57,28 @@ public class Achat implements Serializable {
         this.id = id;
     }
 
-    public int getIdMusique() {
-        return m_IdMusique;
+    public int getMusique() {
+        return musique;
     }
 
-    public void setIdMusique(int m_IdMusique) {
-        this.m_IdMusique = m_IdMusique;
+    public void setMusique(int musique) {
+        this.musique = musique;
     }
 
-    public int getIdAcheteur() {
-        return m_IdAcheteur;
+    public int getAcheteur() {
+        return acheteur;
     }
 
-    public void setIdAcheteur(int m_IdAcheteur) {
-        this.m_IdAcheteur = m_IdAcheteur;
+    public void setAcheteur(int acheteur) {
+        this.acheteur = acheteur;
     }
 
     public Date getDateAchat() {
-        return m_DateAchat;
+        return dateAchat;
     }
 
-    public void setDateAchat(Date m_DateAchat) {
-        this.m_DateAchat = m_DateAchat;
+    public void setDateAchat(Date dateAchat) {
+        this.dateAchat = dateAchat;
     }
 
     @Override

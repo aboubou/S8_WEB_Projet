@@ -66,12 +66,13 @@ public class Utilisateur implements Serializable {
         
     } 
     
-    public Utilisateur(String log, String mdp, String nom, String prenom, String rue, String ville, String codep, String mail, List<Instrument> instru, Abonnement abo ){
+    public Utilisateur(String log, String mdp, String nom, String prenom, Adresse a, String mail, List<Instrument> instru, Abonnement abo ){
         this.login = log;
         this.password = mdp;
         this.lastname = nom;  
         this.firstname = prenom;
         this.mail = mail;
+        this.adresse = a;
         this.dateAbo = new Date();
         this.instruments = instru;
         this.abonnement = abo;
@@ -124,6 +125,14 @@ public class Utilisateur implements Serializable {
 
     public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
+    }
+    
+     public List<Instrument> getInstruments() {
+        return instruments;
+    }
+
+    public void setInstruments(List<Instrument> instruments) {
+        this.instruments = instruments;
     }
     
      public Date getDateAbo() {

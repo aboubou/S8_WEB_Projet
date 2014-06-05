@@ -37,7 +37,7 @@ public class GestionnaireConnexion {
     }
      
     public boolean verifierAbonnement(Date date, String paramLog){
-        Query q = em.createQuery("select abo.duree, u.dateAbo from Abonnement abo, Utilisateur u where u.login = :paramLog and u.abonnement.id = abo.id");
+        Query q = em.createQuery("select u.abonnement.duree, u.dateAbo from  Utilisateur u where u.login = :paramLog");
         q.setParameter("paramLog", paramLog);
         List result = q.getResultList();
         
@@ -53,11 +53,14 @@ public class GestionnaireConnexion {
         Date dateAbo = result.getDate("dateAbo");
         int duree = result.getInt("duree");*/
         
-        if(date.getTime() - dateAbo.getTime() > duree){
+        if((date.getTime() - dateAbo.getTime()) > (duree*24*60*60*1000)){
             return false;
         }
         return true;
+        /*if(result.size()!=0)
+            return false;
         
+        return true;*/
         
     }
     // Add business logic below. (Right-click in editor and choose

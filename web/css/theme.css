@@ -71,3 +71,29 @@ width: 1200px; /* spécifiez la largeur de l'image, une bonne habitude à prendr
 .btn-recherche{
     margin-left:61%
 }
+
+.nav-tabs > li > form > a {
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 4px 4px 0 0;
+    line-height: 1.42857;
+    margin-right: 2px;
+}
+.nav > li > form > a {
+    display: block;
+    padding: 10px 15px;
+    position: relative;
+}
+
+.nav > li > form > a:hover,
+.nav > li > form > a:focus {
+  text-decoration: none;
+  background-color: #eee;
+}
+
+#menu-profil-search, #menu-musiques-search{
+    cursor:pointer;
+}
+
+#panier-info{
+    margin-top:10px;
+}

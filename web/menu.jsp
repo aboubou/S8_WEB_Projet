@@ -7,12 +7,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
+<c:out value="${sessionScope['abonnement']}"/>
+       
     <ul class="nav nav-tabs" id="menu-gen">
         <li class="active"><a href="#">Home</a></li>
-        <li><a href="index.jsp?action=profilUtilisateur">Profil</a></li>
+        <li class="" id="menu-profil-search"><form action="ServletUsers" id="form-profil-init"><input type="hidden" name="action" value="afficherProfil"><a>Profil</a></form></li>
         <c:if test="${not empty sessionScope['abonnement']}">
-        <li><a href="#">Musique</a></li>
+        <li class="" id="menu-musiques-search"><form action="ServletUsers" id="form-musiques-init"><input type="hidden" name="action" value="afficherMusiques"><a>Musique</a></form></li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Recherche ... <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -26,3 +27,5 @@
         </li>
         </c:if>
       </ul>
+
+

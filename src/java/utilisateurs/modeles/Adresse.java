@@ -32,11 +32,11 @@ public class Adresse implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)  
     private int id;  
     @NotNull
-    private String m_Rue;
+    private String rue;
     @NotNull @Size(min=1)  
-    private String m_Ville;  
+    private String ville;  
     @Pattern(regexp="[0-9]{5}") // On accepte les codes postaux du type "06410"  
-    private String m_CodePostal;  
+    private String codePostal;  
     @OneToMany(mappedBy = "adresse")
     private List<Utilisateur> m_Utilisateurs = new ArrayList<>();
   
@@ -53,9 +53,9 @@ public class Adresse implements Serializable {
      * @param codePostal : Code postal de la ville indiquee (Ex: 7500)
      */
     public Adresse(String rue, String ville, String codePostal) {  
-        this.m_Ville = ville;  
-        this.m_CodePostal = codePostal;
-        this.m_Rue = rue; 
+        this.ville = ville;  
+        this.codePostal = codePostal;
+        this.rue = rue; 
     }  
 
     public void setId(int id) {
@@ -67,7 +67,12 @@ public class Adresse implements Serializable {
      * @param ville : la ville a modifier
      */
     public void setVille(String ville) {
-        this.m_Ville = ville;
+        this.ville = ville;
+    }
+    
+
+    public String getVille() {
+       return this.ville;
     }
 
     /**
@@ -75,7 +80,7 @@ public class Adresse implements Serializable {
      * @return : le code postal de la ville
      */
     public String getCodePostal() {
-        return m_CodePostal;
+        return codePostal;
     }
 
     /**
@@ -83,7 +88,7 @@ public class Adresse implements Serializable {
      * @param codePostal : le code postal de ville a modifier
      */
     public void setCodePostal(String codePostal) {
-        this.m_CodePostal = codePostal;
+        this.codePostal = codePostal;
     }
 
     /**
@@ -122,16 +127,16 @@ public class Adresse implements Serializable {
      * Accesseur de consultation de la rue ou habite l'utilisateur
      * @return : la rue ou habite l'utilisateur
      */
-    public String getM_Rue() {
-        return m_Rue;
+    public String getRue() {
+        return rue;
     }
 
     /** 
      * Accesseur de modifacation de la rue ou habite l'utilisateur
      * @param m_Rue : la nouvelle rue ou habite l'utilisateur
      */
-    public void setM_Rue(String m_Rue) {
-        this.m_Rue = m_Rue;
+    public void setRue(String rue) {
+        this.rue = rue;
     }
     
     

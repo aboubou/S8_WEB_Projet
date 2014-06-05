@@ -63,9 +63,9 @@ public class ServletConnexion extends HttpServlet {
                             session.setAttribute("abonnement", true);
                             session.setMaxInactiveInterval(duree);
                             request.setAttribute(ATT_USER, paramLog);
-                            forwardTo="index.jsp?action=identifierUtilisateurSuccess&abonnement=true";
+                            forwardTo="index.jsp?action=identifierUtilisateurSuccess";
                         }
-                        else if( gestionnaireConnexion.verifierAbonnement(new Date(), paramLog)){
+                        else if( gestionnaireConnexion.verifierAbonnement(new Date(), paramLog) == true){
                             
                             session.setAttribute(ATT_SESSION_USER, paramLog);
                             session.setAttribute("pseudo", paramLog);
@@ -75,7 +75,7 @@ public class ServletConnexion extends HttpServlet {
                             request.setAttribute(ATT_USER, paramLog);
                             forwardTo="index.jsp?action=identifierUtilisateurSuccess";
                         }
-                        else{
+                        else if( gestionnaireConnexion.verifierAbonnement(new Date(), paramLog) == false){
                             session.setAttribute(ATT_SESSION_USER, paramLog);
                             session.setAttribute("pseudo", paramLog);
                             session.setAttribute("connecte", true);
@@ -96,6 +96,7 @@ public class ServletConnexion extends HttpServlet {
         else if(action.equals("deconnecterUtilisateur")){
            HttpSession session = request.getSession();
            session.setAttribute("connecte",false);
+           session.setAttribute("abonnement",false);
            session.invalidate();
            forwardTo="index.jsp";
         }

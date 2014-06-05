@@ -17,6 +17,7 @@ import utilisateurs.modeles.Abonnement;
 import utilisateurs.modeles.Utilisateur;
 import utilisateurs.modeles.Adresse;
 import utilisateurs.modeles.Instrument;
+import utilisateurs.modeles.Musique;
 
 /**
  *
@@ -210,6 +211,27 @@ public class GestionnaireUtilisateurs {
         if(q.getResultList().size() < 1)
             return false;
         return true;
+                
+    }
+    
+    public Utilisateur getUtilisateurProfil(String login){
+        Query q = em.createQuery("select u from Utilisateur u where u.login = :login");
+        q.setParameter("login", login);
+        return (Utilisateur)q.getSingleResult();
+                
+    }
+    
+     public Collection<Musique> getAllMusiques(){
+        Query q = em.createQuery("select m from Musique m ");
+        return q.getResultList();
+                
+    }
+     
+     public Musique getMusiqueParID(String id){
+         int idI = Integer.parseInt(id);
+        Query q = em.createQuery("select m from Musique m where m.id = :id");
+        q.setParameter("id", idI);
+        return (Musique)q.getSingleResult();
                 
     }
 }  

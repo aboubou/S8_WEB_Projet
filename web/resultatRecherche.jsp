@@ -17,7 +17,9 @@
                         <th>Instrument</th>
                         <th>Difficulte</th>
                         <th>Piste</th>
-                        <th>Panier</th>    
+                        <c:if test="${(param['action'] != 'afficherPanier') }">
+                        <th>Panier</th> 
+                        </c:if>
                     </tr>
                     </thead>
                    <c:forEach var="t" items="${requestScope['resultatRecherche']}">
@@ -33,7 +35,9 @@
                                </c:forEach>
                            </td>
                            <td>${t.piste}</td>
+                           <c:if test="${(param['action'] != 'afficherPanier') }">
                            <td><input type="checkbox" id="musique-${t.id}" onclick="selectionnerMusique('${t.id}');"></td>
+                           </c:if>
                        </tr>
                     </c:forEach>
  </table>
