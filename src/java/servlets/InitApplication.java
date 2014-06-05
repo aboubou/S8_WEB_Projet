@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import utilisateurs.gestionnaires.GestionnaireInitialisation;
-
 /**
  *
  * @author Alexandre

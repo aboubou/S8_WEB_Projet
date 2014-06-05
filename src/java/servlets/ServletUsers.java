@@ -20,7 +20,6 @@ import utilisateurs.modeles.Utilisateur;
 import utilisateurs.modeles.Adresse;
 import utilisateurs.modeles.Instrument;
 import utilisateurs.modeles.Musique;
-
 /**
  *
  * @author Jim

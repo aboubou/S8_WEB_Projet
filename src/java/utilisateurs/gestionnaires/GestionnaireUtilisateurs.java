@@ -97,6 +97,37 @@ public class GestionnaireUtilisateurs {
 
         return u;  
     }
+     
+     public Utilisateur creerUtilisateur(String pseudo, String mdp, String nom, String prenom, String adresse, String ville, String codep, String mail, ArrayList<Instrument> instruments, Abonnement abonnement) {
+        
+        
+        Adresse a = new Adresse(adresse, ville, codep);
+        em.persist(a);
+        
+        Utilisateur u = new Utilisateur(pseudo, mdp, nom, prenom, mail);
+        
+        u.setAdresse(a);
+        
+        for(int i = 0; i < instruments.size(); i++){
+            u.addInstrument(instruments.get(i));
+        }
+        
+        /*for(int i = 0; i < instruments.length; i++)
+            u.addInstrument(getInstrument(instruments[i]));*/
+        u.setAbonnement(abonnement);
+        
+        
+        // a est déjà en bas et connectée, donc la ligne suivante modifie les
+        // données pour relier l'adresse à l'utilisateur
+        a.addUtilisateur(u);
+        
+        // on persiste l'utilisateur, la relation est déjà en base, cela va donc
+        // ajouter une ligne dans la table des utilisateurs avec une clé étrangère
+        // correspondant à l'adresse
+        em.persist(u);
+
+        return u;  
+    }
   
      public Collection<Utilisateur> getAllUsers() {  
         // Exécution d'une requête équivalente à un select *  
@@ -172,4 +203,13 @@ public class GestionnaireUtilisateurs {
    }*/
     // Add business logic below. (Right-click in editor and choose  
     // "Insert Code > Add Business Method")  
+    
+    public boolean verfierExistence(String pseudo){
+        Query q = em.createQuery("select u from Utilisateur u where u.login = :pseudo");
+        q.setParameter("pseudo", pseudo);
+        if(q.getResultList().size() < 1)
+            return false;
+        return true;
+                
+    }
 }  

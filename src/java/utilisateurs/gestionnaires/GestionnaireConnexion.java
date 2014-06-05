@@ -6,7 +6,11 @@
 
 package utilisateurs.gestionnaires;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collection;  
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;  
 import javax.persistence.EntityManager;  
 import javax.persistence.PersistenceContext;  
@@ -30,6 +34,31 @@ public class GestionnaireConnexion {
         q.setParameter("login", login);
         q.setParameter("password", password);
         return q.getResultList().size();
+    }
+     
+    public boolean verifierAbonnement(Date date, String paramLog){
+        Query q = em.createQuery("select abo.duree, u.dateAbo from Abonnement abo, Utilisateur u where u.login = :paramLog and u.abonnement.id = abo.id");
+        q.setParameter("paramLog", paramLog);
+        List result = q.getResultList();
+        
+        Date dateAbo = new Date();
+        float duree=0;
+        for(Object lignes : result){
+            Object[] ligne = (Object[])lignes ;
+            
+            dateAbo = (Date)ligne[1];
+            duree = (float)ligne[0];
+        }
+        /*ResultSet result = (ResultSet)q.getSingleResult(); q.
+        Date dateAbo = result.getDate("dateAbo");
+        int duree = result.getInt("duree");*/
+        
+        if(date.getTime() - dateAbo.getTime() > duree){
+            return false;
+        }
+        return true;
+        
+        
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

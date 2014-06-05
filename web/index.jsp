@@ -98,14 +98,17 @@ and open the template in the editor.
         </c:if>
         <c:if test="${not empty sessionScope['connecte']}"> 
         <div class="container" id="menu">
-         
+       
             <jsp:include page="menu.jsp"/>
-            <jsp:include page="fRecherche.jsp"/>
-           
-            
+            <c:if test="${param['action'] == 'profilUtilisateur'}">
+                <jsp:include page="profil.jsp"/>
+            </c:if>
+               <c:if test="${(param[action] != 'profilUtilisateur')}">
+            <jsp:include page="fRecherche.jsp"/>   
             <!--<div id="resultat-recherche" >-->
                     <jsp:include page="resultatRecherche.jsp"/> 
             <!--</div>-->
+            </c:if>
         </div>
          </c:if>
     </div>

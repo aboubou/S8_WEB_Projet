@@ -9,6 +9,7 @@ package utilisateurs.modeles;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -40,6 +42,9 @@ public class Utilisateur implements Serializable {
     //@OneToMany(mappedBy = "utilisateur")
     private List<Instrument> instruments = new ArrayList<Instrument>();
 
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dateAbo;
+    
     public Utilisateur() {  
     }  
   
@@ -56,8 +61,22 @@ public class Utilisateur implements Serializable {
         this.lastname = nom;  
         this.firstname = prenom;
         this.mail = mail;
+        this.dateAbo = new Date();
 
+        
     } 
+    
+    public Utilisateur(String log, String mdp, String nom, String prenom, String rue, String ville, String codep, String mail, List<Instrument> instru, Abonnement abo ){
+        this.login = log;
+        this.password = mdp;
+        this.lastname = nom;  
+        this.firstname = prenom;
+        this.mail = mail;
+        this.dateAbo = new Date();
+        this.instruments = instru;
+        this.abonnement = abo;
+        
+    }
 
     public String getFirstname() {
         return firstname;
@@ -105,6 +124,14 @@ public class Utilisateur implements Serializable {
 
     public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
+    }
+    
+     public Date getDateAbo() {
+        return dateAbo;
+    }
+
+    public void setDateAbo(Date dateAbo) {
+        this.dateAbo = dateAbo;
     }
     
      /*public ArrayList<Instrument> getInstruments() {

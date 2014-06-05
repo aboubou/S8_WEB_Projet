@@ -22,7 +22,6 @@ public class Instrument implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     /* Description */
     private String instrument;
     

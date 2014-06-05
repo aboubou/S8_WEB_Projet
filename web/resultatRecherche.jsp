@@ -36,4 +36,4 @@
                            <td><input type="checkbox" id="musique-${t.id}" onclick="selectionnerMusique('${t.id}');"></td>
                        </tr>
                     </c:forEach>
-                </table>
+ </table>

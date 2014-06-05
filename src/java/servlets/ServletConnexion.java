@@ -7,7 +7,11 @@
 package servlets;
 
 import java.io.IOException;  
+import java.sql.SQLException;
 import java.util.Collection;  
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;  
 import javax.servlet.RequestDispatcher;  
 import javax.servlet.ServletException;  
@@ -52,12 +56,36 @@ public class ServletConnexion extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 int duree = -10;
                 if(gestionnaireConnexion.identifierUtilisateur(paramLog, paramPass)!= 0){
-                    session.setAttribute(ATT_SESSION_USER, paramLog);
-                    session.setAttribute("pseudo", paramLog);
-                    session.setAttribute("connecte", true);
-                    session.setMaxInactiveInterval(duree);
-                    request.setAttribute(ATT_USER, paramLog);
-                    forwardTo="index.jsp?action=identifierUtilisateurSuccess";
+                        if(paramLog.equals("admin") && paramPass.equals("admin")){
+                            session.setAttribute(ATT_SESSION_USER, paramLog);
+                            session.setAttribute("pseudo", paramLog);
+                            session.setAttribute("connecte", true);
+                            session.setAttribute("abonnement", true);
+                            session.setMaxInactiveInterval(duree);
+                            request.setAttribute(ATT_USER, paramLog);
+                            forwardTo="index.jsp?action=identifierUtilisateurSuccess&abonnement=true";
+                        }
+                        else if( gestionnaireConnexion.verifierAbonnement(new Date(), paramLog)){
+                            
+                            session.setAttribute(ATT_SESSION_USER, paramLog);
+                            session.setAttribute("pseudo", paramLog);
+                            session.setAttribute("connecte", true);
+                            session.setAttribute("abonnement", true);
+                            session.setMaxInactiveInterval(duree);
+                            request.setAttribute(ATT_USER, paramLog);
+                            forwardTo="index.jsp?action=identifierUtilisateurSuccess";
+                        }
+                        else{
+                            session.setAttribute(ATT_SESSION_USER, paramLog);
+                            session.setAttribute("pseudo", paramLog);
+                            session.setAttribute("connecte", true);
+                            session.setMaxInactiveInterval(duree);
+                            request.setAttribute(ATT_USER, paramLog);
+                            forwardTo="index.jsp?action=identifierUtilisateurSuccess";
+                        }
+                         
+
+                    
                 }else{
                     session.setAttribute(ATT_SESSION_USER, null);
                     session.setAttribute("connecte", false);

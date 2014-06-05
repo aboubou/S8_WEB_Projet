@@ -10,7 +10,8 @@
 
     <ul class="nav nav-tabs" id="menu-gen">
         <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Profil</a></li>
+        <li><a href="index.jsp?action=profilUtilisateur">Profil</a></li>
+        <c:if test="${not empty sessionScope['abonnement']}">
         <li><a href="#">Musique</a></li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Recherche ... <span class="caret"></span></a>
@@ -23,4 +24,5 @@
                 <li><a href="index.jsp?action=rechercherPisteForm">par nombre de pistes</a></li>
             </ul>
         </li>
+        </c:if>
       </ul>

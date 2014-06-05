@@ -79,7 +79,6 @@ public class GestionnaireRecherche {
     }
     
     public Collection<Musique> getTroisMusique(){
-        //Query q = em.createQuery("select m from Musique m where m.titre ='Always' and  m.titre='The Day That Never Comes' and  m.titre='Question!' and m.instrument.instrument='Basse'");
         Query q = em.createQuery("select m from Musique m where m.titre = :titre");
         q.setParameter("titre", "Voodoo Child");
         return  q.getResultList(); 

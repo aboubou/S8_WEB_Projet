@@ -32,6 +32,7 @@ public class Achat implements Serializable {
     /* date d'achat*/
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date m_DateAchat;
+
     
     public Achat(){}
     

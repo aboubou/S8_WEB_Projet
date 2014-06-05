@@ -15,7 +15,6 @@
     <input type="hidden" value="acheterGratuit" name="action" id="inputh-acchatG">
     <button class="btn btn-success" type="submit" id="achatG">Acheter gratuitement !</button>
 </form>
-    
 </c:if>
 <c:if test="${param['resultat']=='success'}">
     <div class="alert alert-success" id="achatG-success">Votre achat est un succès !</div> 

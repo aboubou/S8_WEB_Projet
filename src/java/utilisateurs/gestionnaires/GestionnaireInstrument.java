@@ -26,8 +26,7 @@ public class GestionnaireInstrument {
     private EntityManager em;
     
     public Instrument getInstrument(String id){
-        int idI = Integer.parseInt(id);
-        
+        int idI = Integer.parseInt(id); 
         Query q = em.createQuery("select i from Instrument i where i.id = :idi");
         q.setParameter("idi", idI);
         return (Instrument)q.getSingleResult(); 

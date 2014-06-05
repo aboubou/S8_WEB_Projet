@@ -9,7 +9,6 @@
             30
         </session-timeout>
     </session-config>
-    
     <listener>
         <listener-class>servlets.InitApplication</listener-class>
     </listener>

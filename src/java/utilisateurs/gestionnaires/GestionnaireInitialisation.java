@@ -6,7 +6,9 @@
 
 package utilisateurs.gestionnaires;
 
+import java.util.ArrayList;
 import java.util.Collection;  
+import java.util.Date;
 import javax.ejb.Stateless;  
 import javax.persistence.EntityManager;  
 import javax.persistence.PersistenceContext;  
@@ -188,8 +190,19 @@ public class GestionnaireInitialisation {
          Musique tdtnc_5 = new Musique("The Day That Never Comes", "Metallica", 5, chant, "Metal", 2008, 2);
          em.persist(tdtnc_5);
          
-         Utilisateur admin = new Utilisateur("admin", "admin","admin", "admin");
+         ArrayList<Instrument> instrud = new ArrayList();
+         instrud.add(guitare);
+         instrud.add(basse);
+         
+         Utilisateur admin = new Utilisateur("admin", "admin","admin", "admin", "1 rue de l'admin", "Admin", "99999", "admin@admin.com", instrud, vie);
          em.persist(admin);
+         
+        
+       
+         Utilisateur adminDesabo = new Utilisateur("ud", "ud","Utilisateur désabonné", "Utilisateur désabonné", "1 rue du désabonnement", "Desabonnement","99999", "desabonne@desabonne.com", instrud, mois );
+         Date dateDesabo = new Date(1999, 12, 12);
+         adminDesabo.setDateAbo(dateDesabo);
+         em.persist(adminDesabo);
 
     }
     

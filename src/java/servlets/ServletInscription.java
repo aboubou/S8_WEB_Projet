@@ -84,10 +84,16 @@ public class ServletInscription extends HttpServlet {
                 for(int i = 0; i < instruments.length; i++){
                     listeInstru.add(gestionnaireInstrument.getInstrument(instruments[i]));
                 }
-                //if(!listeInstru.isEmpty())
-                gestionnaireUtilisateurs.creerUtilisateur(pseudo, mdp, nom, prenom, adresse, ville, codep, mail, listeInstru, abonnement);
-                //gestionnaireUtilisateurs.creerUtilisateur(pseudo, mdp, nom, prenom, adresse, ville, codep, mail, instruments, abonnement);
-                forwardTo = "fInscription.jsp?action=creerUtilisateurSuccess";
+                if(!gestionnaireUtilisateurs.verfierExistence(pseudo)){
+                     gestionnaireUtilisateurs.creerUtilisateur(pseudo, mdp, nom, prenom, adresse, ville, codep, mail, listeInstru, abonnement);
+                    //gestionnaireUtilisateurs.creerUtilisateur(pseudo, mdp, nom, prenom, adresse, ville, codep, mail, instruments, abonnement);
+                    forwardTo = "fInscription.jsp?action=creerUtilisateurSuccess";
+                }
+                else{
+                    //request.setAttribute("pseudo", "existant");
+                    forwardTo = "fInscription.jsp?action=formulaireInscription&pseudo=existant";
+                }
+               
             }
         }
         RequestDispatcher dp = request.getRequestDispatcher(forwardTo + "&message=" + message);  

@@ -40,6 +40,7 @@ public class Adresse implements Serializable {
     @OneToMany(mappedBy = "adresse")
     private List<Utilisateur> m_Utilisateurs = new ArrayList<>();
   
+    
     /**
      * Constructeur par defaut
      */

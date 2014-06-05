@@ -42,9 +42,6 @@
             <input type="hidden" name="action" value="identifierUtilisateur">
             <button class="btn btn-success" type="submit">S'identifer</button>
           </form>
-
-           
-             
         </div><!--/.navbar-collapse -->
       </c:if>
      <c:if test="${not empty sessionScope['connecte']}">

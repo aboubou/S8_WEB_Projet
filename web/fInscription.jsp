@@ -3,7 +3,6 @@
     Created on : 24 mai 2014, 11:59:00
     Author     : Alexandre
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
@@ -140,6 +139,9 @@
                    <div class="alert alert-danger">Une erreur est survenue lors de l'enregistrement de votre inscription !</div>
             </c:if>       
             <c:if test="${param['action']=='formulaireInscription'}" >
+                <c:if test="${param['pseudo']=='existant'}" >
+                   <div class="alert alert-danger">Le pseudo est déjà utilisé ! Veuillez en choisir un autre !</div>
+                </c:if>
                 <form id="inscription-form" role="form" class="form-signin" action="ServletInscription">
                   <h2 class="form-signin-heading">Formulaire d'inscription</h2>
 

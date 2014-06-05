@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utilisateurs.gestionnaires.GestionnaireRecherche;
 import utilisateurs.modeles.Musique;
-
 /**
  *
  * @author Alexandre

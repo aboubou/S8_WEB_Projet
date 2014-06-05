@@ -3,7 +3,6 @@
     Created on : 4 juin 2014, 21:46:43
     Author     : Alexandre
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 
