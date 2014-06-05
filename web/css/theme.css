@@ -18,3 +18,58 @@ and open the template in the editor.
     margin-top : 20px;
 }
 
+.menu-link-search {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #333;
+  white-space: nowrap;
+}
+.menu-link-search:hover,
+.menu-link-search:focus {
+  color: #262626;
+  text-decoration: none;
+  background-color: #f5f5f5;
+  cursor : pointer;
+}
+
+#menu-gen{
+    //position:fixed;
+}
+
+#table-recherche{
+    //position: fixed;
+}
+
+#demo{
+    margin-top:100px;
+}
+
+#achatG{
+    margin-left : auto;
+    margin-right: auto;
+}
+
+img {
+display: block;
+margin: 0 auto;
+height: 800px; /* spécifiez la hauteur de l'image, une bonne attitude à prendre */
+width: 1200px; /* spécifiez la largeur de l'image, une bonne habitude à prendre */
+
+} 
+
+
+#achatG-success{
+    display: none;
+}
+
+.dispo-recherche{
+    float:left;
+    width:60%;
+}
+
+.btn-recherche{
+    margin-left:61%
+}

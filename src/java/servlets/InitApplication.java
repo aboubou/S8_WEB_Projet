@@ -29,14 +29,13 @@ import utilisateurs.gestionnaires.GestionnaireInitialisation;
  * @author Alexandre
  */
 @WebListener
-public class InitApplication implements ServletContextListener {
+public class InitApplication extends HttpServlet implements ServletContextListener {
    GestionnaireInitialisation gestionnaireInitialisation = lookupGestionnaireInitialisationBean();
     
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        gestionnaireInitialisation.initialiserBD();
-        
+        gestionnaireInitialisation.initialiserBD();    
     }
 
     @Override

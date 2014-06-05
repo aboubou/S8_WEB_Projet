@@ -15,6 +15,7 @@ import utilisateurs.modeles.Adresse;
 import utilisateurs.modeles.Instrument;
 import utilisateurs.modeles.Abonnement;
 import utilisateurs.modeles.Musique;
+import utilisateurs.modeles.Utilisateur;
 
 /**
  *
@@ -186,6 +187,9 @@ public class GestionnaireInitialisation {
          em.persist(tdtnc_4);
          Musique tdtnc_5 = new Musique("The Day That Never Comes", "Metallica", 5, chant, "Metal", 2008, 2);
          em.persist(tdtnc_5);
+         
+         Utilisateur admin = new Utilisateur("admin", "admin","admin", "admin");
+         em.persist(admin);
 
     }
     
@@ -196,8 +200,12 @@ public class GestionnaireInitialisation {
     
     public Collection<Abonnement> getAllAbonnement(){
         Query q = em.createQuery("select a from Abonnement a");
-        return q.getResultList();  
-        
+        return q.getResultList(); 
+    }
+    
+     public Collection<Musique> getTroisMusique(){
+        Query q = em.createQuery("select m from Musique where m.titre ='Always' and  m.titre='The Day That Never Comes' and  m.titre='Question!' and m.instrument.instrument='basse'");
+        return q.getResultList(); 
     }
     
 }

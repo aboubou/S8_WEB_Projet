@@ -9,13 +9,22 @@
 <div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
-        <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+          
+           <c:if test="${empty sessionScope['connecte']}">
+                <form action="ServletUsers" id="form-init">
+                    <input type="hidden" name="action" value="initialiserDemo">
+                </form>
+            </c:if>
+                <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+        
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="#" class="navbar-brand"><c:out value="${sessionScope['connecte']}"/></a>
+        <c:if test="${empty sessionScope['connecte']}">
+            <a id="btn-demo" class="navbar-brand">Demo</a>
+        </c:if>
       </div>
        <c:if test="${empty sessionScope['connecte']}">
         <div class="navbar-collapse collapse">

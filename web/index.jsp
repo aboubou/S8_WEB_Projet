@@ -22,79 +22,92 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/theme.css">
         <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script>
+            
+           
+             function selectionnerStyle(val){
+                $("#style-input").val(val); 
+                $("#sty-inputh-search").attr("value",val);
+            }
+            
+            function selectionnerAnnee(val){
+                $("#annee-input").val(val); 
+                $("#ann-inputh-search").attr("value",val);
+            }
+            
+            function selectionnerInstrument(val){
+                $("#instrument-input").val(val); 
+                $("#instru-inputh-search").attr("value",val);
+            }
+            
+             $(document).ready(function() {
+                $('#menu-style').click(function()
+                    {
+                    $('#form-style-init').submit();
+                });
+                
+                $('#menu-annee-search').click(function()
+                    {
+                    $('#form-annee-init').submit();
+                });
+                
+                $('#menu-instrument-search').click(function()
+                    {
+                    $('#form-instrument-init').submit();
+                });
+                
+                 $('#menu-link-annee').click(function(){
+                    $('#form-instrument-ah').submit();
+                });
+                
+                 $('#btn-demo').click(function(){
+                    $('#form-init').submit();
+                });
+                
+                 $('#menu-gen > li').click(function(){
+                    $("#menu-gen > li").removeClass("active");
+                    $(this).addClass("active");
+                });
+                
+                 <c:if test="${param['resultat']=='success'}" >
+                        $("#achatG-success").slideDown("slow");
+                            
+                        $("#angus-img").slideDown("slow");
+                        
+                </c:if>
+                
+            });
+            
+            function selectionnerMusique(val){
+                var id = "musique-"+val;
+                if($("#musique-"+val).is(":checked")){
+                    $("#musiqueR-"+val).attr("name", "selectionnee");
+                }else
+                    $("#musiqueR-"+val).attr("name", "");
+            }
+        </script>
     </head>
     <body>
         <header id="header">
             <jsp:include page="header.jsp"/>
         </header>
-        <div id="demo"></div>
+        <c:if test="${param['action'] == 'initialiserDemo'}">
+        <div id="demo" class="container"> 
+            <jsp:include page="demo.jsp"/>
+        </div>
+        </c:if>
+        <c:if test="${not empty sessionScope['connecte']}"> 
         <div class="container" id="menu">
+         
             <jsp:include page="menu.jsp"/>
-            <c:if test="${param['action'] == 'rechercherTitreForm'}">
-                <form id="form-titre" class="navbar-form navbar-left" role="search" action="ServletUsers">
-                    <div class="form-group">
-                        Veuillez indiquez votre titre à rechercher : <input type="text" size="100" name="titre" class="form-control" placeholder="Titre">
-                    </div>
-                    <input type="hidden" value="rechercherTitre" name="action">
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-            </c:if>
-            <c:if test="${param['action'] == 'rechercherArtisteForm'}">
-                <form id="form-titre" class="navbar-form navbar-left" role="search" action="ServletUsers">
-                    <div class="form-group">
-                        Veuillez indiquez votre artiste à rechercher : <input type="text" size="100" name="titre" class="form-control" placeholder="Artiste">
-                    </div>
-                    <input type="hidden" value="rechercherArtiste" name="action">
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-            </c:if>
-            <c:if test="${param['action'] == 'rechercherStyleForm'}">
-                <form id="form-titre" class="navbar-form navbar-left" role="search" action="ServletUsers">
-                   <div class="input-group" id="style-input-search">
-                      <div class="input-group-btn">
-                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Veuillez selectionner le style à rechercher<span class="caret"></span></button>
-                          <ul class="dropdown-menu">
-                              <c:forEach var="i" items="${requestScope['resultatStyles']}" >
-                                    <li><a id="i-${i.id}" onclick="" value="${i.id}">${i.style}</a></li>
-                              </c:forEach>
-                          </ul>
-                      </div><!-- /btn-group -->
-                      <input type="hidden"  id="s-inputh-search"  name="style-choosen" value="">
-                      <input type="text" readonly class="form-control" id="style-input"  name="style">
-                  </div>
-                    <input type="hidden" value="rechercherStyle" name="action">
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-            </c:if>
+            <jsp:include page="fRecherche.jsp"/>
+           
             
             <!--<div id="resultat-recherche" >-->
-                <span>Résultat de votre recherche</span>
-                <table id="table-recherche" border="1" class="container">
-                    <tr>
-                        <td>Titre</td>
-                        <td>Artiste</td>
-                        <td>Année</td>
-                        <td>Style</td>
-                        <td>Instrument</td>
-                        <td>Difficulte</td>
-                        <td>Piste</td>
-                        <td>Panier</td>    
-                    </tr>
-                   <c:forEach var="t" items="${requestScope['resultatRecherche']}">
-                       <tr>
-                           <td>${t.titre}</td>
-                           <td>${t.artiste}</td>
-                           <td>${t.annee}</td>
-                           <td>${t.style}</td>
-                           <td>${t.instrument.instrument}</td>
-                           <td>${t.difficulte}</td>
-                           <td>${t.piste}</td>
-                           <td></td>
-                       </tr>
-                    </c:forEach>
-                </table>
+                    <jsp:include page="resultatRecherche.jsp"/> 
             <!--</div>-->
         </div>
+         </c:if>
     </div>
     </body>
 </html>

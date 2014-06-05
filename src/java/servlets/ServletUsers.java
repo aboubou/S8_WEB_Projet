@@ -18,6 +18,7 @@ import utilisateurs.gestionnaires.GestionnaireRecherche;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
 import utilisateurs.modeles.Adresse;
+import utilisateurs.modeles.Instrument;
 import utilisateurs.modeles.Musique;
 
 /**
@@ -46,6 +47,8 @@ public class ServletUsers extends HttpServlet {
             throws ServletException, IOException {
         // Pratique pour décider de l'action à faire  
         String action = request.getParameter("action");
+        String[] actions = request.getParameterValues("action");
+        String initStylesMenu = request.getParameter("initStylesMenu");
         String forwardTo = "";
         String message = "";
 
@@ -64,46 +67,83 @@ public class ServletUsers extends HttpServlet {
                 Collection<Musique> listeResultat = gestionnaireRecherche.getMusiqueParArtiste(artiste);
                 if (!listeResultat.isEmpty()) {
                     request.setAttribute("resultatRecherche", listeResultat);
-                    forwardTo = "index.jsp?action=rechercheResultat";
+                    forwardTo = "index.jsp?action=rechercheResultat&resultat=success";
                 } else {
                     forwardTo = "index.jsp?action=rechercheAucunResultat";
                 } 
-            } else if (action.equals("rechercherStyleForm")) {
-                Collection<String> listeStyles = gestionnaireRecherche.getStyles();
+            } else if (actions[0].equals("rechercherStylesForm")) {
+                
+                Collection<Musique> listeStyles = gestionnaireRecherche.getStyles();
                 if (!listeStyles.isEmpty()) {
                     request.setAttribute("resultatStyles", listeStyles);
                     forwardTo = "index.jsp?action=rechercherStyleForm";
                 } else {
                     forwardTo = "index.jsp?action=rechercheTitreZero";
                 }
-            } else if (action.equals("rechercherAnneeForm")) {
-                /*String titre = request.getParameter("artiste");
-                Collection<Musique> listeResultat = gestionnaireRecherche.getMusiqueParTitre(titre);
+             } else if (action.equals("rechercherStyle")) {
+                String style = request.getParameter("style-choosen");
+                Collection<Musique> listeResultat = gestionnaireRecherche.getMusiqueParStyle(style);
                 if (!listeResultat.isEmpty()) {
                     request.setAttribute("resultatRecherche", listeResultat);
-                    forwardTo = "index.jsp?action=rechercheTitreResultat";
+                    forwardTo = "index.jsp?action=rechercheResultat";
+                } else {
+                    forwardTo = "index.jsp?action=rechercheAucunResultat";
+                }
+
+            } else if (actions[0].equals("rechercherAnneeInitForm")) {
+                Collection<Musique> listeAnnees = gestionnaireRecherche.getAllAnnees();
+                if (!listeAnnees.isEmpty()) {
+                    request.setAttribute("resultatStyles", listeAnnees);
+                    forwardTo = "index.jsp?action=rechercherAnneeForm";
                 } else {
                     forwardTo = "index.jsp?action=rechercheTitreZero";
-                } */ 
-            } else if (action.equals("rechercherInstrumentForm")) {
-                /*String titre = request.getParameter("artiste");
-                Collection<Musique> listeResultat = gestionnaireRecherche.getMusiqueParTitre(titre);
+                }
+            } else if (action.equals("rechercherInstrumentInitForm")) {
+                 Collection<Instrument> listeInstru = gestionnaireRecherche.getAllInstruments();
+                if (!listeInstru.isEmpty()) {
+                    request.setAttribute("resultatStyles", listeInstru);
+                    forwardTo = "index.jsp?action=rechercherInstruForm";
+                } else {
+                    forwardTo = "index.jsp?action=rechercheTitreZero";
+                }
+            } else if (action.equals("rechercherAnnee")) {
+                String annee = request.getParameter("annee-choosen");
+                Collection<Musique> listeResultat = gestionnaireRecherche.getMusiqueParAnnee(annee);
                 if (!listeResultat.isEmpty()) {
                     request.setAttribute("resultatRecherche", listeResultat);
-                    forwardTo = "index.jsp?action=rechercheTitreResultat";
+                    forwardTo = "index.jsp?action=rechercheResultat";
                 } else {
-                    forwardTo = "index.jsp?action=rechercheTitreZero";
-                } */ 
-            } else if (action.equals("rechercherPisteForm")) {
-                /*String titre = request.getParameter("artiste");
-                Collection<Musique> listeResultat = gestionnaireRecherche.getMusiqueParTitre(titre);
+                    forwardTo = "index.jsp?action=rechercheAucunResultat";
+                }
+
+            } else if (action.equals("rechercherInstrument")) {
+                String instru = request.getParameter("instrument-choosen");
+                Collection<Musique> listeResultat = gestionnaireRecherche.getMusiqueParInstrument(instru);
                 if (!listeResultat.isEmpty()) {
                     request.setAttribute("resultatRecherche", listeResultat);
-                    forwardTo = "index.jsp?action=rechercheTitreResultat";
+                    forwardTo = "index.jsp?action=rechercheResultat";
                 } else {
-                    forwardTo = "index.jsp?action=rechercheTitreZero";
-                } */ 
-            } else if (action.equals("creerUnUtilisateur")) {
+                    forwardTo = "index.jsp?action=rechercheAucunResultat";
+                }
+
+            } else if (action.equals("initialiserDemo")) {
+                Collection<Musique> listeResultat = gestionnaireRecherche.getTroisMusique();
+                if (!listeResultat.isEmpty()) {
+                    request.setAttribute("resultatRecherche", listeResultat);
+                    forwardTo = "index.jsp?action=initialiserDemo";
+                } else {
+                    forwardTo = "index.jsp?action=rechercheAucunResultat";
+                }
+            } else if (action.equals("acheterGratuit")) {
+                String[] MusiqueSelectionnees = request.getParameterValues("selectionnee");
+                /*Collection<Musique> listeResultat = gestionnaireRecherche.getTroisMusique();
+                if (!listeResultat.isEmpty()) {
+                    request.setAttribute("resultatRecherche", listeResultat);*/
+                    forwardTo = "index.jsp?action=initialiserDemo&resultat=success";
+                /*} else {
+                    forwardTo = "index.jsp?action=rechercheAucunResultat";
+                }*/
+            }  else if (action.equals("creerUnUtilisateur")) {
                 String param1 = request.getParameter("nom");
                 String param2 = request.getParameter("prenom");
                 String param3 = request.getParameter("login");
