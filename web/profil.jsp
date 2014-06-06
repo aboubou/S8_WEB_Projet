@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 
-<div class="panel panel-info">
+<div class="panel panel-info" id="profil-info">
       <div class="panel-heading">
         <h3 class="panel-title">Votre profil</h3>
       </div>

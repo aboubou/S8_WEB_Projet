@@ -7,9 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:out value="${sessionScope['abonnement']}"/>
        
-    <ul class="nav nav-tabs" id="menu-gen">
+    <ul class="nav nav-tabs backgrouWhite" id="menu-gen">
         <li class="active"><a href="#">Home</a></li>
         <li class="" id="menu-profil-search"><form action="ServletUsers" id="form-profil-init"><input type="hidden" name="action" value="afficherProfil"><a>Profil</a></form></li>
         <c:if test="${not empty sessionScope['abonnement']}">

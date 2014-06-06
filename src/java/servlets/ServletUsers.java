@@ -163,11 +163,12 @@ public class ServletUsers extends HttpServlet {
            
             }else if (action.equals("mettrePanier")) {
                 String[] musiques = request.getParameterValues("selectionnee");
-                if(musiques.length!=0){
+                if(musiques!=null){
                     Collection<Musique> resultList= new ArrayList<Musique>();
                     for(int i = 0 ; i < musiques.length; i++){
                          resultList.add(gestionnaireUtilisateurs.getMusiqueParID(musiques[i]));
                     }
+                    
                     int nbMusiques = resultList.size();
                     int prix=0;                
                     if(nbMusiques%3 == 0)
@@ -186,25 +187,16 @@ public class ServletUsers extends HttpServlet {
            
             } else if (action.equals("AcheterPanier")) {
                 String[] musiques = request.getParameterValues("selectionnee");
-                Collection<Musique> resultList= new ArrayList<Musique>();
-                for(int i = 0 ; i < musiques.length; i++){
-                     resultList.add(gestionnaireUtilisateurs.getMusiqueParID(musiques[i]));
+                String login = (String)session.getAttribute("pseudo");
+                if(musiques!=null){
+                    for(int i = 0 ; i < musiques.length; i++){
+                         gestionnaireUtilisateurs.effectuerAchat(musiques[i], login);
+                    }
+
+                    forwardTo = "index.jsp?action=achatSuccess";
+                 }else{
+                    forwardTo = "index.jsp?action=achatError";
                 }
-                int nbMusiques = resultList.size();
-                int prix=0;                
-                if(nbMusiques%3 == 0)
-                    prix = (nbMusiques/3)*10;
-                else if(nbMusiques%3 == 1)
-                    prix = (nbMusiques-(nbMusiques%3))/3*10 + 5;
-                else if(nbMusiques%3 == 2)
-                    prix = (nbMusiques-(nbMusiques%3))/3*10 + 8;
-                    
-                request.setAttribute("resultatRecherche", resultList);
-                request.setAttribute("prixAchat", prix);
-                forwardTo = "index.jsp?action=afficherPanier";
-                /*} else {
-                    forwardTo = "index.jsp?action=rechercheAucunResultat";
-                }*/
            
             }else if (action.equals("updateUtilisateur")) {
 

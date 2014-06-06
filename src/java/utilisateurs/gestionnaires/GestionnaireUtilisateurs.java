@@ -8,12 +8,14 @@ package utilisateurs.gestionnaires;
 
 import java.util.ArrayList;
 import java.util.Collection;  
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;  
 import javax.persistence.EntityManager;  
 import javax.persistence.PersistenceContext;  
 import javax.persistence.Query;  
 import utilisateurs.modeles.Abonnement;
+import utilisateurs.modeles.Achat;
 import utilisateurs.modeles.Utilisateur;
 import utilisateurs.modeles.Adresse;
 import utilisateurs.modeles.Instrument;
@@ -232,6 +234,25 @@ public class GestionnaireUtilisateurs {
         Query q = em.createQuery("select m from Musique m where m.id = :id");
         q.setParameter("id", idI);
         return (Musique)q.getSingleResult();
+                
+    }
+     
+     public void effectuerAchat( String id, String log){
+        int idM = Integer.parseInt(id);
+        Query q = em.createQuery("select m from Utilisateur m where m.login = :login");
+        q.setParameter("login", log);
+        Utilisateur utilsateur=(Utilisateur)q.getSingleResult();
+        int idu = utilsateur.getId();
+        Query q2 = em.createQuery("select m from Musique m where m.id = :id");
+        q2.setParameter("id", idM);
+        Musique musique=(Musique)q2.getSingleResult();
+        idM = musique.getId();
+
+         if(idM !=0 && idu != 0){
+            Achat achat = new Achat(idM,idu , new Date());
+            em.persist(achat);
+         }
+         
                 
     }
 }  

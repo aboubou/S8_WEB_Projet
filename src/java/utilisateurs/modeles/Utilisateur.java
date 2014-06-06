@@ -42,6 +42,9 @@ public class Utilisateur implements Serializable {
     //@OneToMany(mappedBy = "utilisateur")
     private List<Instrument> instruments = new ArrayList<Instrument>();
 
+    //@OneToMany(mappedBy = "utilisateur")
+    private List<Achat> achats = new ArrayList<Achat>();
+    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateAbo;
     
@@ -133,6 +136,14 @@ public class Utilisateur implements Serializable {
 
     public void setInstruments(List<Instrument> instruments) {
         this.instruments = instruments;
+    }
+    
+    public List<Achat> getAchats() {
+        return achats;
+    }
+
+    public void setAchats(List<Achat> achats) {
+        this.achats = achats;
     }
     
      public Date getDateAbo() {

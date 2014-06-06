@@ -50,6 +50,13 @@ and open the template in the editor.
                     $('#form-style-init').submit();
                 });
                 
+                $("#achatPanier").click(function(){
+                    if( $("#panier-info table input").attr("name") != "action"){
+                        $("#panier-info table input").attr("name","selectionnee");
+                        $("#panier-info").slideUp("slow");
+                    }
+                })
+                
                  $('#btn-profil').click(function(){
                     $('#menu-profil').submit();
                 });
@@ -85,8 +92,23 @@ and open the template in the editor.
                     $(this).addClass("active");
                 });
                 
+                <c:if test="${param['action']=='afficherPanier'}" >
+                        $("#panier-info").slideDown("slow");
+                </c:if>
+                    
+                <c:if test="${(param['action'] == 'achatSuccess')}">
+                   $("#achatS").slideDown("slow");
+         
+                </c:if>
+                $("#mettrePanier").click(function(){
+                        $("#form-mettre-p").slideUp("slow");
+                })
+                    
+         
+
+                
                  <c:if test="${param['resultat']=='success'}" >
-                        $("#achatG-success").slideDown("slow");
+                        $("#panier-info").slideDown("slow");
                             
                         $("#angus-img").slideDown("slow");
                         
@@ -108,15 +130,14 @@ and open the template in the editor.
             <jsp:include page="header.jsp"/>
         </header>
         <c:if test="${param['action'] == 'initialiserDemo'}">
-        <div id="demo" class="container"> 
+        <div id="demo" class="container backgrouWhite"> 
             <jsp:include page="demo.jsp"/>
         </div>
         </c:if>
         <c:if test="${not empty sessionScope['connecte']}"> 
-        <div class="container" id="menu">
+        <div class="container backgrouWhite" id="menu">
        
             <jsp:include page="menu.jsp"/>
-            <c:out value="${param['action']}"/>
             <c:if test="${param['action'] == 'afficherProfilSuccess'}">
                 <jsp:include page="profil.jsp"/>
             </c:if>
@@ -136,17 +157,17 @@ and open the template in the editor.
             </c:if>
             <c:if test="${(param['action'] == 'afficherPanier') }">
             <div class="panel panel-info" id="panier-info">
-      <div class="panel-heading">
-        <h3 class="panel-title">Votre profil</h3>
-      </div>
-      <div class="panel-body">
-                <form action="ServletUsers" id="form-achat-p">
-                    <jsp:include page="resultatRecherche.jsp"/>
-                    <div class="alert alert-info">Votre facture s'élève à ${prixAchat} €</div>
-                    <input type="hidden" value="AcheterPanier" name="action" id="inputh-achat-panier">
-                    <button class="btn btn-success" type="submit" id="achatPanier">Acheter !</button>
-                </form>
-           </div>
+                <div class="panel-heading">
+                  <h3 class="panel-title">Votre panier</h3>
+                </div>
+                <div class="panel-body">
+                          <form action="ServletUsers" id="form-achat-p">
+                              <jsp:include page="resultatRecherche.jsp"/>
+                              <div class="alert alert-info">Votre facture s'élève à ${prixAchat} €</div>
+                              <input type="hidden" value="AcheterPanier" name="action" id="inputh-achat-panier">
+                              <button class="btn btn-success" type="submit" id="achatPanier">Acheter !</button>
+                          </form>
+                </div>
             </div>
             </c:if>
             <c:if test="${(param['action'] == 'rechercheAucunResultat')}">
@@ -154,7 +175,10 @@ and open the template in the editor.
             </c:if>
             <c:if test="${(param['action'] == 'panierAucuneMusique')}">
                  <div class="alert alert-warning">Votre panier est vide !</div>
-            </c:if>     
+            </c:if> 
+            <c:if test="${(param['action'] == 'achatSuccess')}">
+                 <div class="alert alert-warning" id="achatS">Votre achat a été réalisé !</div>
+            </c:if> 
             
         </div>
          </c:if>

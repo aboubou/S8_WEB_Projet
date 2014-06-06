@@ -7,7 +7,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 
  <c:if test="${param['action'] == 'rechercherTitreForm'}">
-                <form id="form-titre" class="navbar-form navbar-left" role="search" action="ServletUsers">
+                <form id="form-titre" class="navbar-form navbar-left backgrouWhite" role="search" action="ServletUsers">
                     <div class="form-group">
                         Veuillez indiquez votre titre à rechercher : <input type="text" size="100" name="titre" class="form-control" placeholder="Titre">
                     </div>
@@ -16,7 +16,7 @@
                 </form>
             </c:if>
             <c:if test="${param['action'] == 'rechercherArtisteForm'}">
-                <form id="form-titre" class="navbar-form navbar-left" role="search" action="ServletUsers">
+                <form id="form-titre" class="navbar-form navbar-left backgrouWhite" role="search" action="ServletUsers">
                     <div class="form-group">
                         Veuillez indiquez votre artiste à rechercher : <input type="text" size="100" name="artiste" class="form-control" placeholder="Artiste">
                     </div>
@@ -25,7 +25,7 @@
                 </form>
             </c:if>
             <c:if test="${param['action'] == 'rechercherStyleForm'}">
-                <form id="form-style" class="navbar-form navbar-left" role="search" action="ServletUsers">
+                <form id="form-style" class="navbar-form navbar-left backgrouWhite" role="search" action="ServletUsers">
                    <div class="input-group dispo-recherche" id="style-input-search" >
                       <div class="input-group-btn">
                           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Veuillez selectionner le style à rechercher<span class="caret"></span></button>
@@ -45,7 +45,7 @@
                 </form>
             </c:if>
             <c:if test="${param['action'] == 'rechercherAnneeForm'}">
-                <form id="form-annee" class="navbar-form navbar-left" role="search" action="ServletUsers">
+                <form id="form-annee" class="navbar-form navbar-left backgrouWhite" role="search" action="ServletUsers">
                    <div class="input-group dispo-recherche" id="annee-input-search">
                       <div class="input-group-btn" >
                           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Veuillez selectionner l'année à rechercher<span class="caret"></span></button>
@@ -66,7 +66,7 @@
                 </form>
             </c:if>
             <c:if test="${param['action'] == 'rechercherInstruForm'}">
-                <form id="form-instrument" class="navbar-form navbar-left" role="search" action="ServletUsers">
+                <form id="form-instrument" class="navbar-form navbar-left backgrouWhite" role="search" action="ServletUsers">
                    <div class="input-group dispo-recherche" id="instrument-input-search">
                       <div class="input-group-btn">
                           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Veuillez selectionner l'instrument à rechercher<span class="caret"></span></button>
