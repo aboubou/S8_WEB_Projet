@@ -166,6 +166,10 @@ public class Utilisateur implements Serializable {
         this.instruments.add(instrument);
     }
     
+    public void addAchat(Achat achat) {
+        this.achats.add(achat);
+    }
+    
     public void removeInstrument(Instrument instrument) {
         this.instruments.remove(instrument);
     }

@@ -251,6 +251,7 @@ public class GestionnaireUtilisateurs {
          if(idM !=0 && idu != 0){
             Achat achat = new Achat(idM,idu , new Date());
             em.persist(achat);
+            utilsateur.addAchat(achat);
          }
          
                 
